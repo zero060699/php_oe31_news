@@ -1,0 +1,17 @@
+{
+  "name": "php_oe31_news",
+  "description": "",
+  "main": "",
+  "authors": [
+    "zero06061999 <builoc191999@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/zero060699/php_oe31_news",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
