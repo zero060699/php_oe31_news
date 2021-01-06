@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::group(['middleware' => ['localization']], function () {
-
+    Route::resource('dashboard', 'AdminController')->only('index');
+    Route::resource('categories', 'CategoryController');
 });
 Route::get('change-languages/{language}', 'LangController@changeLanguage')->name('change-languages');
 
