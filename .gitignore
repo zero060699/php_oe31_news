@@ -5,6 +5,13 @@
 /public/css
 /public/bower_components/*
 /storage/*.key
+/public/adminbackend
+/public/assets
+/public/vendor
+/config/sweetalert.php
+/resources/views/vendor
+/public/frontend
+/public/images/
 /vendor
 .env
 .env.backup
