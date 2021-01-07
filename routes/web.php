@@ -19,6 +19,7 @@ Route::group(['middleware' => ['localization']], function () {
     Route::resource('posts', 'PostController');
     Route::get('/postRequest', 'AdminController@showRequestPost')->name('postRequest');
     Route::resource('home', 'ClientController');
+    Route::resource('users', 'UserController');
 });
 Route::get('change-languages/{language}', 'LangController@changeLanguage')->name('change-languages');
 Auth::routes();

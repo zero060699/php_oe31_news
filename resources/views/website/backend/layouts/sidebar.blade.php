@@ -27,7 +27,7 @@
                     <span class="fa fa-chevron-down"></span>
                 </a>
                 <ul class="nav child_menu">
-                    <li><a href="#">{{ trans('message.user') }}</a></li>
+                    <li><a href="{{ route('users.index') }}">{{ trans('message.user') }}</a></li>
                 </ul>
             </li>
             <li>

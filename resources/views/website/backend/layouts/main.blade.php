@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-@include('website.backend.layouts.head');
+@include('website.backend.layouts.head')
 
 <body class="nav-md">
     @include('sweetalert::alert')
@@ -78,13 +78,12 @@
                 </div>
             </div>
             <!-- /top navigation -->
-
-            <!-- page content -->
-            <div class="right_col" role="main">
-                @yield('content')
-            </div>
-            <!-- /page content -->
-            @include('website.backend.layouts.foot');
+        <!-- page content -->
+        <div class="right_col" role="main">
+            @yield('content')
+        </div>
+        <!-- /page content -->
+    @include('website.backend.layouts.foot')
 </body>
 
 </html>
