@@ -31,11 +31,11 @@
             </li>
             <li>
                 <a>
-                    <i class="fas fa-tags"></i>{{ trans('message.requestWriter') }}
+                    <i class="fas fa-tags"></i>{{ trans('message.request_writer') }}
                     <span class="fa fa-chevron-down"></span>
                 </a>
                 <ul class="nav child_menu">
-                    <li><a href="#">{{ trans('message.requestWriter') }}</a></li>
+                    <li><a href="#">{{ trans('message.request_writer') }}</a></li>
                 </ul>
             </li>
         </ul>

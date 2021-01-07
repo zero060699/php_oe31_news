@@ -27,5 +27,5 @@
     <link href="{{ asset('adminbackend/build/css/custom.min.css') }}" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('bower_components/components-font-awesome/css/all.css') }}">
+    <link rel="stylesheet" href="{{ asset('bower_components/bootstrap/js/bootstrap-modal.js') }}">
 </head>
