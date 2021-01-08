@@ -17,7 +17,8 @@
                     <span class="fa fa-chevron-down"></span>
                 </a>
                 <ul class="nav child_menu">
-                    <li><a href="#">{{ trans('message.post') }}</a></li>
+                    <li><a href="{{ route('posts.index') }}">{{ trans('message.post') }}</a></li>
+                    <li><a href="{{ route('postRequest') }}">{{ trans('message.request_post') }}</a></li>
                 </ul>
             </li>
             <li>
@@ -35,7 +36,7 @@
                     <span class="fa fa-chevron-down"></span>
                 </a>
                 <ul class="nav child_menu">
-                    <li><a href="#">{{ trans('message.request_writer') }}</a></li>
+
                 </ul>
             </li>
         </ul>

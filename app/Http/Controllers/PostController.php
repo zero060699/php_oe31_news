@@ -4,37 +4,24 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Http\Response;
+use App\Models\Category;
+use RealRashid\SweetAlert\Facades\Alert;
 
-class AdminController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index()
     {
-        return view('website.backend.layouts.main');
+        $posts = Post::with('author')->where('status', config('number_status_post.status'))->latest()->get();
+
+        return view('website.backend.post.index', compact('posts'));
     }
 
-    public function showRequestPost()
-    {
-        $posts = Post::where('status', config('number_status_post.status_request'))->latest()->get();
-
-        return view('website.backend.post.pending_request', compact('posts'));
-    }
-
-    public function previewPost($id)
-    {
-        $post = Post::findOrFail($id);
-
-        return view('website.frontend.preview_post', compact('post'));
-    }
     /**
      * Show the form for creating a new resource.
      *
@@ -64,7 +51,15 @@ class AdminController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        if ($post->status == config('number_status_post.status_request')) {
+            abort(Response::HTTP_NOT_FOUND);
+        }
+        $post->load('comments.user');
+        $category = Category::all();
+
+        return view('website.frontend.detail', compact('post', 'category'));
     }
 
     /**
@@ -87,7 +82,11 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $post->update($request->only('status'));
+        Alert::success(trans('message.success'), trans('message.successfully'));
+
+        return redirect()->back();
     }
 
     /**
