@@ -17,4 +17,7 @@ Route::group(['middleware' => ['localization']], function () {
     Route::resource('categories', 'CategoryController');
 });
 Route::get('change-languages/{language}', 'LangController@changeLanguage')->name('change-languages');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
 

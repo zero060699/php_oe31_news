@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use App\Models\RequestWriter;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -21,6 +21,7 @@ class User extends Authenticatable
         'email',
         'password',
         'image',
+        'status',
         'role_id',
     ];
 
