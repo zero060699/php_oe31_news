@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
+use App\Models\Comment;
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Http\Response;
 
 class CategoryController extends Controller
 {
@@ -13,7 +17,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $items = Category::where('parent_id', config('number_format.parent_id'))->get();
+
+        return view('website.backend.category.index', compact('items'));
     }
 
     /**
@@ -23,7 +29,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::where('parent_id', config('number_format.parent_id'))->get();
+
+        return view('website.backend.category.create', compact('categories'));
     }
 
     /**
@@ -34,7 +42,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $category = new Category;
+        $category->create($request->only(['name', 'parent_id']));
+        Alert::success(trans('message.success'), trans('messsage.successfully'));
+
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -45,7 +57,15 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $category = Category::findOrFail($id);
+
+        if ($category->parent_id === config('number_format.parent_id')) {
+            $category->load('children');
+
+            return view('website.backend.category.show', compact('category'));
+        }
+
+        abort(Response::HTTP_NOT_FOUND);
     }
 
     /**
@@ -56,7 +76,16 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $categoryList = Category::all();
+
+        if ($category->parent_id === config('number_format.parent_id')) {
+            $category->load('children');
+
+            return view('website.backend.category.update', compact('category', 'categoryList'));
+        }
+
+        return view('website.backend.category.update', compact('category', 'categoryList'));
     }
 
     /**
@@ -68,7 +97,14 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $category->update([
+            'name' => $request->name,
+            'parent_id' => $request->parent_id,
+        ]);
+        Alert::success(trans('message.success'), trans('messsage.edit_successfully'));
+
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -79,6 +115,17 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $category->load('children');
+
+        if ($category->children->count()) {
+            foreach ($category->children as $child) {
+                $child->delete();
+            }
+        }
+        $category->delete();
+        Alert::success(trans('message.success'), trans('messsage.delete_successfully'));
+
+        return redirect()->back();
     }
 }
