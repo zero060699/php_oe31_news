@@ -28,7 +28,7 @@
                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">{{ trans('message.banned_at') }}<span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 ">
-                        <input type="date" id="status" required="required" class="form-control " name="banned_until" value="{{ $users->banned_until }}">
+                        <input type="datetime" id="status" required="required" class="form-control " name="banned_until" value="{{ $users->banned_until }}">
                     </div>
                 </div>
 
