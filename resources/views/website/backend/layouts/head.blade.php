@@ -17,15 +17,19 @@
     <link href="{{ asset('adminbackend/vendors/nprogress/nprogress.css') }}" rel="stylesheet">
     <!-- iCheck -->
     <link href="{{ asset('adminbackend/vendors/iCheck/skins/flat/green.css') }}" rel="stylesheet">
+
     <!-- bootstrap-progressbar -->
     <link href="{{ asset('adminbackend/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet">
     <!-- JQVMap -->
     <link href="{{ asset('adminbackend/vendors/jqvmap/dist/jqvmap.min.css') }}" rel="stylesheet"/>
     <!-- bootstrap-daterangepicker -->
     <link href="{{ asset('adminbackend/vendors/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('bower_components/bootstrap/js/src/modal.js') }}">
+
     <!-- Custom Theme Style -->
     <link href="{{ asset('adminbackend/build/css/custom.min.css') }}" rel="stylesheet">
-    <!-- Styles -->
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('bower_components/bootstrap/js/bootstrap-modal.js') }}">
-</head>
+    <link rel="stylesheet" href="{{ asset('bower_components/boostrap/js/src/modal.js') }}">
+     <!-- Styles -->
+    <link rel="stylesheet" href="{{ asset('css/user.css') }}">
+
+  </head>

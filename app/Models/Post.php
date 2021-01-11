@@ -13,6 +13,7 @@ class Post extends Model
         'image',
         'view',
         'category_id',
+        'status',
     ];
 
     public function category()
@@ -30,8 +31,8 @@ class Post extends Model
         return $this->hasMany(Comment::class);
     }
 
-    public function user()
+    public function author()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

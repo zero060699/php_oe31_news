@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => ['localization']], function () {
     Route::resource('dashboard', 'AdminController')->only('index');
     Route::resource('categories', 'CategoryController');
+    Route::resource('posts', 'PostController');
+    Route::get('/postRequest', 'AdminController@showRequestPost')->name('postRequest');
+    Route::resource('home', 'ClientController');
 });
 Route::get('change-languages/{language}', 'LangController@changeLanguage')->name('change-languages');
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 
