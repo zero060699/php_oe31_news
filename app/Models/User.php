@@ -23,6 +23,7 @@ class User extends Authenticatable
         'image',
         'status',
         'role_id',
+        'banned_until',
     ];
 
     /**
