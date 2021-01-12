@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
-use Illuminate\Http\Response;
 use App\Models\Category;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Auth;
 
-class PostController extends Controller
+class AuthorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +17,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('author')->where('status', config('number_status_post.status'))->latest()->get();
-
-        return view('website.backend.post.index', compact('posts'));
+        //
     }
 
     /**
@@ -29,7 +27,10 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        $category = Category::all();
+        $category->load('children');
+
+        return view('website.frontend.create', compact('category'));
     }
 
     /**
@@ -40,29 +41,28 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $fileName = time() . '.' . $extension;
+            $file->move(public_path(config('image_user.image')), $fileName);
+            Post::create([
+                'title' => $request->title,
+                'content' => $request->content,
+                'category_id' => $request->category_id,
+                'view' => config('number_status_post.view'),
+                'user_id' => Auth::user()->id,
+                'image'=> $fileName,
+            ]);
+            Alert::success(trans('message.success'), trans('messsage.successfully'));
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $post = Post::findOrFail($id);
-
-        if ($post->status == config('number_status_post.status_request')) {
-            abort(Response::HTTP_NOT_FOUND);
+            return redirect()->route('home.index');
+        } else {
+            Alert::danger(trans('message.success'), trans('messsage.add_successfully'));
         }
-        $post->load('comments.user');
-        $category = Category::where('parent_id', config('number_format.parent_id'))->get();
-        $category->load('children');
 
-        return view('website.frontend.detail', compact('post', 'category'));
+        return redirect()->route('home.index');
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -83,11 +83,7 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $post = Post::findOrFail($id);
-        $post->update($request->only('status'));
-        Alert::success(trans('message.success'), trans('message.successfully'));
-
-        return redirect()->back();
+        //
     }
 
     /**

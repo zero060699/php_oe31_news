@@ -15,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate('paginate.page')->all();
+        $users = User::paginate(config('paginate.page'));
 
         return view('website.backend.users.list')->with('users', $users);
     }
@@ -44,6 +44,7 @@ class UserController extends Controller
     {
         $users = User::findOrFail($id);
         Alert::success('Success', trans('message.ok'));
+        $filename = config('image_user.image_user');
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
