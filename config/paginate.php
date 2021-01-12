@@ -1,5 +1,5 @@
 <?php
 
 return[
-    'page' => '2',
+    'page' => 2,
 ];

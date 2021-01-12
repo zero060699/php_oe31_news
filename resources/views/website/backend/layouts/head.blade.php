@@ -30,6 +30,6 @@
     <link href="{{ asset('adminbackend/build/css/custom.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('bower_components/boostrap/js/src/modal.js') }}">
      <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('css/user.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
   </head>
