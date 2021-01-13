@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Post;
-use Illuminate\Http\Response;
 use App\Models\Category;
-use RealRashid\SweetAlert\Facades\Alert;
+use App\Models\Post;
 
-class PostController extends Controller
+class ClientController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +15,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('author')->where('status', config('number_status_post.status'))->latest()->get();
+        $category = Category::where('parent_id', config('number_format.parent_id'))->get();
+        $category->load('children');
+        $posts = Post::where('status', config('number_status_post.status'))->latest()->paginate(config('number_status_post.paginate_post'));
 
-        return view('website.backend.post.index', compact('posts'));
+        return view('website.frontend.index', compact('posts', 'category'));
     }
 
     /**
@@ -51,16 +51,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = Post::findOrFail($id);
-
-        if ($post->status == config('number_status_post.status_request')) {
-            abort(Response::HTTP_NOT_FOUND);
-        }
-        $post->load('comments.user');
-        $category = Category::where('parent_id', config('number_format.parent_id'))->get();
-        $category->load('children');
-
-        return view('website.frontend.detail', compact('post', 'category'));
+        //
     }
 
     /**
@@ -83,11 +74,7 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $post = Post::findOrFail($id);
-        $post->update($request->only('status'));
-        Alert::success(trans('message.success'), trans('message.successfully'));
-
-        return redirect()->back();
+        //
     }
 
     /**
