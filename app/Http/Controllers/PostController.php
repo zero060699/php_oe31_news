@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Http\Response;
 use App\Models\Category;
+use App\Models\User;
+use App\Models\Like;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PostController extends Controller
@@ -57,12 +60,24 @@ class PostController extends Controller
             abort(Response::HTTP_NOT_FOUND);
         }
         $post->load('comments.user');
-        $category = Category::where('parent_id', config('number_format.parent_id'))->get();
-        $category->load('children');
+        $category = Category::where('parent_id', config('number_format.parent_id'))->with('children')->get();
+        $post->update([
+            'view' => $post->view + config('number_format.view'),
+        ]);
+        $like = $post->likes->where('like', config('number_format.view'))->count();
 
         return view('website.frontend.detail', compact('post', 'category'));
     }
 
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        $category = Category::where('parent_id', config('number_format.parent_id'))->get();
+        $category->load('children');
+        $posts = Post::where('title', 'LIKE', '%' .$search. '%')->with('category')->get();
+
+        return view('website.frontend.search', compact('posts', 'category', 'search'));
+    }
     /**
      * Show the form for editing the specified resource.
      *
