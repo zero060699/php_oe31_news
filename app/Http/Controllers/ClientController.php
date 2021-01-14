@@ -21,8 +21,10 @@ class ClientController extends Controller
         $category = Category::where('parent_id', config('number_format.parent_id'))->get();
         $category->load('children');
         $posts = Post::where('status', config('number_status_post.status'))->latest()->paginate(config('number_status_post.paginate_home'));
+        $itempost= Post::orderBy('created_at', 'desc')->take(config('post.post'));
+        $itemview = Post::all()->sortBy('view')->take(config('post.post'));
 
-        return view('website.frontend.index', compact('posts', 'category'));
+        return view('website.frontend.index', compact('posts', 'category', 'itempost', 'itemview',));
     }
 
     public function filterCategory($id)
@@ -34,9 +36,10 @@ class ClientController extends Controller
         ]);
         $posts = Post::where('category_id', $id)->with('category')->latest()->get();
         $allCategory = Category::where('parent_id', config('number_format.parent_id'))->get();
+        $itempost= Post::all()->sortBy('created_at')->take(config('post.post'));
         $allCategory->load('children');
 
-        return view('website.frontend.filter_category', compact('posts', 'allCategory', 'category'));
+        return view('website.frontend.filter_category', compact('posts', 'allCategory', 'category', 'itempost'));
     }
 
     public function postLike(Request $request)

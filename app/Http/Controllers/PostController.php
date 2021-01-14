@@ -70,8 +70,11 @@ class PostController extends Controller
             'view' => $post->view + config('number_format.view'),
         ]);
         $like = $post->likes->where('like', config('number_format.view'))->count();
+        $category->load('children');
+        $itempost = $post->orderBy('created_at', 'desc')->take(config('post.post'))->get();
+        $postcategory = $post->where('category_id', $post->category_id)->take(config('post.post'))->get();
 
-        return view('website.frontend.detail', compact('post', 'category'));
+        return view('website.frontend.detail', compact('post', 'category', 'itempost', 'postcategory'));
     }
 
     public function search(Request $request)

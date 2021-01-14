@@ -297,32 +297,32 @@
                             <!--Post aside style 2-->
                             <div class="sidebar-widget mb-50">
                                 <div class="widget-header mb-30">
-                                    <h5 class="widget-title">{{ trans('message.recent') }}
+                                    <h5 class="widget-title">{{ trans('message.lastest') }}
                                         <span>{{ trans('message.post') }}</span>
                                     </h5>
                                 </div>
                                 <div class="post-aside-style-3">
+                                    @foreach($itempost as $item)
                                     <article class="bg-white border-radius-15 mb-30 p-10 wow fadeIn  animated">
                                         <div class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
-                                            <a href="single.html">
+                                            <a href="{{ asset('images/' . $item->image) }}">
 
                                             </a>
                                         </div>
                                         <div class="pl-10 pr-10">
                                             <h5 class="post-title mb-15">
-                                                <a href="single.html">{{ trans('message.title') }}</a>
+                                                <a href="{{ route('posts.show', [$item->id]) }}">{{ $item->title }}</a>
                                             </h5>
 
                                             <div
                                                 class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
-                                                <span class="post-in"><a
-                                                        href="category.html">{{ trans('message.category') }}</a></span>
-                                                <span class="post-by">{{ trans('message.by') }}<a
-                                                        href="author.html">{{ trans('message.author') }}</a></span>
+                                                <span class="post-in"><a>{{ trans('message.category') }}</a></span>
+                                                <span class="post-by">{{ trans('message.by') }}  <a>{{ trans('message.author') }}</a></span>
                                                 <span class="post-on">{{ trans('message.created_at') }}</span>
                                             </div>
                                         </div>
                                     </article>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -341,26 +341,27 @@
                         <div class="sidebar-widget mb-md-30">
                             <div class="widget-header mb-30">
                                 <h5 class="widget-title">
-                                    {{ trans('message.top') }}<span>{{ trans('message.trending') }}</span>
+                                    {{ trans('message.like') }}<span>{{ trans('message.category') }}</span>
                                 </h5>
                             </div>
                             <div class="post-aside-style-2">
+                                @foreach($postcategory as $post)
                                 <ul class="list-post">
                                     <li class="mb-30 wow fadeIn animated">
                                         <div class="d-flex">
                                             <div class="post-thumb d-flex mr-15 border-radius-5 img-hover-scale">
                                                 <a class="color-white" href="single.html">
-                                                    <img src="{{ asset('assets/imgs/thumbnail-12.jpg') }}" alt="">
+                                                    <img src="{{ asset('images/' . $post->image) }}" alt="">
                                                 </a>
                                             </div>
                                             <div class="post-content media-body">
                                                 <h6 class="post-title mb-10 text-limit-2-row">
-                                                    <a href="single.html">{{ trans('message.title') }}</a>
+                                                    <a href="{{ route('posts.show', [$item->id]) }}">{{ $item->title }}</a>
                                                 </h6>
                                                 <div
                                                     class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
                                                     <span class="post-by">{{ trans('message.by') }}
-                                                        <a href="author.html">{{ trans('message.author') }}
+                                                        <a href="{{ route('authors.store') }}">{{ trans('message.author') }}
                                                         </a>
                                                     </span>
                                                     <span class="post-on">{{ trans('message.created_at') }}</span>
@@ -369,71 +370,7 @@
                                         </div>
                                     </li>
                                 </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="sidebar-widget mb-md-30">
-                            <div class="widget-header mb-30">
-                                <h5 class="widget-title">
-                                    {{ trans('message.editor') }}<span>{{ trans('message.picked') }}</span>
-                                </h5>
-                            </div>
-                            <div class="post-aside-style-1 border-radius-10 p-20 bg-white">
-                                <ul class="list-post">
-                                    <li class="mb-20">
-                                        <div class="d-flex">
-                                            <div class="post-thumb d-flex mr-15 border-radius-5 img-hover-scale">
-                                                <a class="color-white" href="single.html">
-                                                    <img src="{{ asset('assets/imgs/thumbnail-4.jpg') }}" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="post-content media-body">
-                                                <h6 class="post-title mb-10 text-limit-2-row">
-                                                    <a href="single.html">
-                                                        {{ trans('message.title') }}
-                                                    </a>
-                                                </h6>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="sidebar-widget mb-sm-30">
-                            <div class="widget-header mb-30">
-                                <h5 class="widget-title"><span>{{ trans('message.most_popular') }}</span></h5>
-                            </div>
-                            <div class="post-aside-style-2">
-                                <ul class="list-post">
-                                    <li class="mb-30 wow fadeIn-animated">
-                                        <div class="d-flex">
-                                            <div class="post-thumb d-flex mr-15 border-radius-5 img-hover-scale">
-                                                <a class="color-white" href="single.html">
-                                                    <img src="{{ asset('assets/imgs/thumbnail-2.jpg') }}" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="post-content media-body">
-                                                <h6 class="post-title mb-10 text-limit-2-row">
-                                                    <a href="single.html">
-                                                        {{ trans('message.title') }}
-                                                    </a>
-                                                </h6>
-                                                <div
-                                                    class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                    <span class="post-by">{{ trans('message.by') }}
-                                                        <a href="author.html">
-                                                            {{ trans('message.author') }}
-                                                        </a>
-                                                    </span>
-                                                    <span class="post-on">{{ trans('message.created_at') }}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
+                                @endforeach
                             </div>
                         </div>
                     </div>
