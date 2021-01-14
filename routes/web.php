@@ -21,6 +21,10 @@ Route::group(['middleware' => ['localization']], function () {
     Route::resource('home', 'ClientController');
     Route::resource('users', 'UserController');
     Route::resource('authors', 'AuthorController');
+    Route::get('/filter/{id}', 'ClientController@filterCategory')->name('filterCategory');
+    Route::get('/search', 'PostController@search')->name('search');
+    Route::post('/like', 'ClientController@postLike')->name('like');
+    Route::post('/dislike', 'ClientController@postDisLike')->name('dislike');
 });
 Route::get('change-languages/{language}', 'LangController@changeLanguage')->name('change-languages');
 Auth::routes();

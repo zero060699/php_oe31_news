@@ -53,7 +53,8 @@
                                             @endforeach
 
                                             <div class="col-md-6 text-right">
-                                                <a href="#"><img class="border-radius-10" src="assets/imgs/ads-2.jpg" alt=""></a>
+                                                <a href="#"><img class="border-radius-10" src="assets/imgs/ads-2.jpg"
+                                                        alt=""></a>
                                             </div>
                                         </div>
                                     </li>
@@ -64,20 +65,23 @@
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('login') }}">{{ trans('message.login') }}</a>
                                         </li>
-                                    @if (Route::has('register'))
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('register') }}">{{ trans('message.register') }}</a>
-                                        </li>
-                                    @endif
+                                        @if (Route::has('register'))
+                                            <li class="nav-item">
+                                                <a class="nav-link"
+                                                    href="{{ route('register') }}">{{ trans('message.register') }}</a>
+                                            </li>
+                                        @endif
                                     @else
                                         <li class="nav-item dropdown">
-                                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                                 {{ Auth::user()->name }}
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                                 <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                                     @csrf
-                                                    <button class="btn btn-light" type="submit">{{ trans('message.logout') }}</button>
+                                                    <button class="btn btn-light"
+                                                        type="submit">{{ trans('message.logout') }}</button>
                                                 </form>
                                             </div>
                                         </li>
@@ -100,6 +104,12 @@
                                 </div>
                             </nav>
                         </div>
+                        <!-- Search -->
+                        <form action="{{ route('search') }}" method="GET"
+                            class="search-form d-lg-inline float-right position-relative mr-30 d-none">
+                            <input type="text" class="search_field" placeholder="{{ trans('message.search') }}" value="" name="search">
+                            <button type="submit" class="search-icon"><i class="ti-search mr-5"></i></button>
+                        </form>
                         <!-- Off canvas -->
                         <div class="off-canvas-toggle-cover">
                             <div class="off-canvas-toggle hidden d-inline-block ml-15" id="off-canvas-toggle">
@@ -123,8 +133,8 @@
                     enctype="multipart/form-data" method="POST" action="{{ route('authors.store') }}">
                     @csrf
                     <div class="item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">{{ trans('message.category') }}<span
-                                class="required">*</span>
+                        <label class="col-form-label col-md-3 col-sm-3 label-align"
+                            for="first-name">{{ trans('message.category') }}<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 ">
 
@@ -160,7 +170,8 @@
                     <div class="ln_solid"></div>
                     <div class="item form-group">
                         <div class="col-md-6 col-sm-6 offset-md-3">
-                            <a class="btn btn-primary" type="button" href="{{ route('home.index') }}">{{ trans('message.back') }}</a>
+                            <a class="btn btn-primary" type="button"
+                                href="{{ route('home.index') }}">{{ trans('message.back') }}</a>
                             <button type="submit" class="btn btn-success">{{ trans('message.submit') }}</button>
                         </div>
                     </div>

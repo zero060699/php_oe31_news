@@ -37,9 +37,11 @@
                                         </a>
                                     </div>
                                     <div class="post-content media-body">
-                                        <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">{{ trans('message.title') }}</a></h6>
+                                        <h6 class="post-title mb-10 text-limit-2-row"><a
+                                                href="single.html">{{ trans('message.title') }}</a></h6>
                                         <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                            <span class="post-by">{{ trans('message.by') }}<a href="author.html">{{ trans('message.author') }}</a></span>
+                                            <span class="post-by">{{ trans('message.by') }}<a
+                                                    href="author.html">{{ trans('message.author') }}</a></span>
                                             <span class="post-on">{{ trans('message.created_at') }}</span>
                                         </div>
                                     </div>
@@ -53,9 +55,11 @@
                                         </a>
                                     </div>
                                     <div class="post-content media-body">
-                                        <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">{{ trans('message.title') }}</a></h6>
+                                        <h6 class="post-title mb-10 text-limit-2-row"><a
+                                                href="single.html">{{ trans('message.title') }}</a></h6>
                                         <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                            <span class="post-by">{{ trans('message.by') }}<a href="author.html">{{ trans('message.author') }}</a></span>
+                                            <span class="post-by">{{ trans('message.by') }}<a
+                                                    href="author.html">{{ trans('message.author') }}</a></span>
                                             <span class="post-on">{{ trans('message.created_at') }}</span>
                                         </div>
                                     </div>
@@ -69,9 +73,11 @@
                                         </a>
                                     </div>
                                     <div class="post-content media-body">
-                                        <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">{{ trans('message.title') }}</a></h6>
+                                        <h6 class="post-title mb-10 text-limit-2-row"><a
+                                                href="single.html">{{ trans('message.title') }}</a></h6>
                                         <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                            <span class="post-by">{{ trans('message.by') }}<a href="author.html">{{ trans('message.author') }}</a></span>
+                                            <span class="post-by">{{ trans('message.by') }}<a
+                                                    href="author.html">{{ trans('message.author') }}</a></span>
                                             <span class="post-on">{{ trans('message.created_at') }}</span>
                                         </div>
                                     </div>
@@ -143,26 +149,29 @@
                                             </li>
                                         @endauth
                                         @guest
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('login') }}">{{ trans('message.login') }}</a>
-                                        </li>
-                                        @if (Route::has('register'))
                                             <li class="nav-item">
-                                                <a class="nav-link" href="{{ route('register') }}">{{ trans('message.register') }}</a>
+                                                <a class="nav-link" href="{{ route('login') }}">{{ trans('message.login') }}</a>
                                             </li>
-                                        @endif
+                                            @if (Route::has('register'))
+                                                <li class="nav-item">
+                                                    <a class="nav-link"
+                                                        href="{{ route('register') }}">{{ trans('message.register') }}</a>
+                                                </li>
+                                            @endif
                                         @else
-                                        <li class="nav-item dropdown">
-                                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                                {{ Auth::user()->name }}
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                                <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                                                    @csrf
-                                                    <button class="btn btn-light" type="submit">{{ trans('message.logout') }}</button>
-                                                </form>
-                                            </div>
-                                        </li>
+                                            <li class="nav-item dropdown">
+                                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                                    {{ Auth::user()->name }}
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                                        @csrf
+                                                        <button class="btn btn-light"
+                                                            type="submit">{{ trans('message.logout') }}</button>
+                                                    </form>
+                                                </div>
+                                            </li>
                                         @endguest
                                     </ul>
 
@@ -170,18 +179,18 @@
                                 </nav>
                             </div>
 
-                            <!-- Search -->
-                            <form action="#" method="get"
-                                class="search-form d-lg-inline float-right position-relative mr-30 d-none">
-                                <input type="text" class="search_field" placeholder="Search" value="" name="s">
-                                <span class="search-icon"><i class="ti-search mr-5"></i></span>
-                            </form>
-                            <!-- Off canvas -->
-                            <div class="off-canvas-toggle-cover">
-                                <div class="off-canvas-toggle hidden d-inline-block ml-15" id="off-canvas-toggle">
-                                    <ion-icon name="grid-outline"></ion-icon>
-                                </div>
-                            </div>
+                           <!-- Search -->
+                           <form action="{{ route('search') }}" method="GET"
+                           class="search-form d-lg-inline float-right position-relative mr-30 d-none">
+                           <input type="text" class="search_field" placeholder="{{ trans('message.search') }}" value="" name="search">
+                           <button type="submit" class="search-icon"><i class="ti-search mr-5"></i></button>
+                       </form>
+                       <!-- Off canvas -->
+                       <div class="off-canvas-toggle-cover">
+                           <div class="off-canvas-toggle hidden d-inline-block ml-15" id="off-canvas-toggle">
+                               <ion-icon name="grid-outline"></ion-icon>
+                           </div>
+                       </div>
                         </div>
                     </div>
                 </div>
@@ -197,16 +206,27 @@
                         <!-- Widget Categories -->
 
                         <!-- Widget Categories -->
+                        <div class="sidebar-widget widget_categories_2 border-radius-10 bg-white mb-30">
+                            @foreach ($category as $item)
+                                <ul class="font-small text-muted">
+                                    <li class="cat-item cat-item-2 active"><a href="{{ route('filterCategory', [$item->id]) }}">
+                                        <span class="mr-10">
+                                            <ion-icon name="earth-outline"></ion-icon>
+                                        </span>{{ $item->name }}</a>
+                                    </li>
+                                </ul>
+                            @endforeach
+                        </div>
                         <div class="sidebar-widget widget_categories border-radius-10 bg-white mb-30">
                             <div class="widget-header position-relative mb-15">
                                 <h5 class="widget-title"><strong>{{ trans('message.category') }}</strong></h5>
                             </div>
                             @foreach ($category as $item)
-                            <ul class="font-small text-muted">
-                                @foreach ($item->children as $child)
-                                    <li class="cat-item cat-item-2"><a href="#">{{ $child->name }}</a></li>
-                                @endforeach
-                            </ul>
+                                <ul class="font-small text-muted">
+                                    @foreach ($item->children as $child)
+                                        <li class="cat-item cat-item-2"><a href="{{ route('filterCategory', [$child->id]) }}">{{ $child->name }}</a></li>
+                                    @endforeach
+                                </ul>
                             @endforeach
                         </div>
                     </div>
@@ -216,7 +236,8 @@
                             <div class="col-lg-8 col-md-12">
                                 <!-- Featured posts -->
                                 <div class="featured-post mb-50">
-                                    <h4 class="widget-title mb-30">{{ trans('message.breaking') }}<span>{{ trans('message.news') }}</span></h4>
+                                    <h4 class="widget-title mb-30">
+                                        {{ trans('message.breaking') }}<span>{{ trans('message.news') }}</span></h4>
                                     <div class="featured-slider-1 border-radius-10">
                                         <div class="featured-slider-1-items">
                                             <div class="slider-single p-10">
@@ -235,8 +256,7 @@
                                                         <div class="float-right font-small">
                                                             <span>
                                                                 <span class="mr-10 text-muted">
-                                                                    <i class="fa fa-eye"
-                                                                        aria-hidden="true"></i>
+                                                                    <i class="fa fa-eye" aria-hidden="true"></i>
                                                                 </span>{{ trans('message.view') }}
                                                             </span>
                                                             <span class="ml-30"><span class="mr-10 text-muted"><i
@@ -244,7 +264,8 @@
                                                                         aria-hidden="true"></i></span>{{ trans('message.comment') }}</span>
                                                         </div>
                                                     </div>
-                                                    <h4 class="post-title mb-20"><a href="#">{{ trans('message.title') }}</a></h4>
+                                                    <h4 class="post-title mb-20"><a
+                                                            href="#">{{ trans('message.title') }}</a></h4>
                                                     <div class="mb-20 overflow-hidden">
                                                         <div class="entry-meta meta-2 float-left">
                                                             <a class="float-left mr-10 author-img" href="author.html"
@@ -273,10 +294,12 @@
                                                             <span><span class="mr-10 text-muted"><i class="fa fa-eye"
                                                                         aria-hidden="true"></i></span>{{ trans('message.view') }}</span>
                                                             <span class="ml-30"><span class="mr-10 text-muted">
-                                                                <i class="fa fa-comment"aria-hidden="true"></i></span>{{ trans('message.comment') }}</span>
+                                                                    <i class="fa fa-comment"
+                                                                        aria-hidden="true"></i></span>{{ trans('message.comment') }}</span>
                                                         </div>
                                                     </div>
-                                                    <h4 class="post-title mb-20"><a href="#">{{ trans('message.title') }}</a>
+                                                    <h4 class="post-title mb-20"><a
+                                                            href="#">{{ trans('message.title') }}</a>
                                                     </h4>
                                                     <div class="mb-20 overflow-hidden">
                                                         <div class="entry-meta meta-2 float-left">
@@ -316,7 +339,8 @@
                                 <!--Post aside style 2-->
                                 <div class="sidebar-widget">
                                     <div class="widget-header mb-30">
-                                        <h5 class="widget-title">{{ trans('message.top') }}<span>{{ trans('message.trending') }}</span></h5>
+                                        <h5 class="widget-title">
+                                            {{ trans('message.top') }}<span>{{ trans('message.trending') }}</span></h5>
                                     </div>
                                     <div class="post-aside-style-2">
                                         <ul class="list-post">
@@ -332,7 +356,8 @@
                                                                 href="single.html">{{ trans('message.title') }}</a></h6>
                                                         <div
                                                             class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                            <span class="post-by">{{ trans('message.by') }}<a href="author.html">{{ trans('message.author') }}</a></span>
+                                                            <span class="post-by">{{ trans('message.by') }}<a
+                                                                    href="author.html">{{ trans('message.author') }}</a></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -349,7 +374,8 @@
                                                                 href="single.html">{{ trans('message.title') }}</a></h6>
                                                         <div
                                                             class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                            <span class="post-by">{{ trans('message.by') }}<a href="author.html">{{ trans('message.author') }}</a></span>
+                                                            <span class="post-by">{{ trans('message.by') }}<a
+                                                                    href="author.html">{{ trans('message.author') }}</a></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -366,7 +392,8 @@
                                                                 href="single.html">{{ trans('message.title') }}</a></h6>
                                                         <div
                                                             class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                            <span class="post-by">{{ trans('message.by') }}<a href="author.html">{{ trans('message.author') }}</a></span>
+                                                            <span class="post-by">{{ trans('message.by') }}<a
+                                                                    href="author.html">{{ trans('message.author') }}</a></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -383,7 +410,9 @@
                                     <div class="widget-header position-relative mb-30">
                                         <div class="row">
                                             <div class="col-7">
-                                                <h4 class="widget-title mb-0">{{ trans('message.latest') }}<span>{{ trans('message.post') }}</span></h4>
+                                                <h4 class="widget-title mb-0">
+                                                    {{ trans('message.latest') }}<span>{{ trans('message.post') }}</span>
+                                                </h4>
                                             </div>
                                         </div>
                                     </div>
@@ -402,8 +431,11 @@
                                                     <a class="entry-meta meta-0" href="category.html"><span
                                                             class="post-in background2 text-primary font-x-small">{{ trans('message.category') }}</span></a>
                                                     <div class="float-right font-small">
-                                                        <span><span class="mr-10 text-muted"><i class="fa fa-eye" aria-hidden="true"></i></span>{{ trans('message.view') }}</span>
-                                                        <span class="ml-30"><span class="mr-10 text-muted"><i class="fa fa-comment" aria-hidden="true"></i></span>{{ trans('message.comment') }}</span>
+                                                        <span><span class="mr-10 text-muted"><i class="fa fa-eye"
+                                                                    aria-hidden="true"></i></span>{{ trans('message.view') }}</span>
+                                                        <span class="ml-30"><span class="mr-10 text-muted"><i
+                                                                    class="fa fa-comment"
+                                                                    aria-hidden="true"></i></span>{{ trans('message.comment') }}</span>
                                                     </div>
                                                 </div>
                                                 <h4 class="post-title mb-20">
@@ -415,7 +447,8 @@
                                                 <div class="mb-20 overflow-hidden">
                                                     <div
                                                         class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                        <span class="post-by">{{ trans('message.by') }}<a href="author.html">{{ trans('message.author') }}</a></span>
+                                                        <span class="post-by">{{ trans('message.by') }}<a
+                                                                href="author.html">{{ trans('message.author') }}</a></span>
                                                         <span class="post-on">{{ trans('message.created_at') }}</span>
                                                     </div>
                                                 </div>
@@ -426,7 +459,8 @@
                                                 class="p-10 background-white border-radius-10 mb-30 wow fadeIn animated">
                                                 <div class="d-flex">
                                                     <div class="post-thumb d-flex mr-15 border-radius-15 img-hover-scale">
-                                                        <a class="color-white" href="{{ route('posts.show', [$post->id]) }}">
+                                                        <a class="color-white"
+                                                            href="{{ route('posts.show', [$post->id]) }}">
                                                             <img class="border-radius-15"
                                                                 src="{{ asset('images/' . $post->image) }}" alt="">
                                                         </a>
@@ -437,13 +471,14 @@
                                                                     class="post-in text-danger font-x-small">{{ $post->category->name }}</span></a>
                                                         </div>
                                                         <h5 class="post-title mb-15 text-limit-2-row">
-                                                            <a href="{{ route('posts.show', [$post->id]) }}">{{ $post->title }}</a>
+                                                            <a
+                                                                href="{{ route('posts.show', [$post->id]) }}">{{ $post->title }}</a>
                                                         </h5>
                                                         <div
                                                             class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
                                                             <span class="post-by">{{ trans('message.by') }}<a
                                                                     href="author.html">{{ $post->author->name }}</a></span>
-                                                            <span class="post-on">{{ $post->created_at }}</span>
+                                                            <span class="post-on">{{  date('M d ,Y', strtotime($post->created_at)) }} {{ trans('message.at') }} {{  date('g:ia', strtotime($post->created_at)) }}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -456,7 +491,8 @@
                             <div class="col-lg-4 col-md-12 sidebar-right">
                                 <div class="sidebar-widget mb-50">
                                     <div class="widget-header mb-30">
-                                        <h5 class="widget-title">{{ trans('message.most') }}<span>{{ trans('message.popular') }}</span></h5>
+                                        <h5 class="widget-title">
+                                            {{ trans('message.most') }}<span>{{ trans('message.popular') }}</span></h5>
                                     </div>
                                     <div class="post-aside-style-3">
                                         <article class="bg-white border-radius-15 mb-30 p-10 wow fadeIn animated">
@@ -466,11 +502,14 @@
                                                 </a>
                                             </div>
                                             <div class="pl-10 pr-10">
-                                                <h5 class="post-title mb-15"><a href="single.html">{{ trans('message.title') }}</a></h5>
+                                                <h5 class="post-title mb-15"><a
+                                                        href="single.html">{{ trans('message.title') }}</a></h5>
                                                 <div
                                                     class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
-                                                    <span class="post-in"><a href="category.html">{{ trans('message.category') }}</a></span>
-                                                    <span class="post-by">{{ trans('message.by') }}<a href="author.html">{{ trans('message.author') }}</a></span>
+                                                    <span class="post-in"><a
+                                                            href="category.html">{{ trans('message.category') }}</a></span>
+                                                    <span class="post-by">{{ trans('message.by') }}<a
+                                                            href="author.html">{{ trans('message.author') }}</a></span>
                                                 </div>
                                             </div>
                                         </article>
@@ -481,11 +520,14 @@
                                                 </a>
                                             </div>
                                             <div class="pl-10 pr-10">
-                                                <h5 class="post-title mb-15"><a href="single.html">{{ trans('message.title') }}</a></h5>
+                                                <h5 class="post-title mb-15"><a
+                                                        href="single.html">{{ trans('message.title') }}</a></h5>
                                                 <div
                                                     class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
-                                                    <span class="post-in"><a href="category.html">{{ trans('message.category') }}</a></span>
-                                                    <span class="post-by">{{ trans('message.by') }}<a href="author.html">{{ trans('message.author') }}</a></span>
+                                                    <span class="post-in"><a
+                                                            href="category.html">{{ trans('message.category') }}</a></span>
+                                                    <span class="post-by">{{ trans('message.by') }}<a
+                                                            href="author.html">{{ trans('message.author') }}</a></span>
                                                 </div>
                                             </div>
                                         </article>
@@ -496,11 +538,14 @@
                                                 </a>
                                             </div>
                                             <div class="pl-10 pr-10">
-                                                <h5 class="post-title mb-15"><a href="single.html">{{ trans('message.title') }}</a></h5>
+                                                <h5 class="post-title mb-15"><a
+                                                        href="single.html">{{ trans('message.title') }}</a></h5>
                                                 <div
                                                     class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
-                                                    <span class="post-in"><a href="category.html">{{ trans('message.category') }}</a></span>
-                                                    <span class="post-by">{{ trans('message.by') }}<a href="author.html">{{ trans('message.author') }}</a></span>
+                                                    <span class="post-in"><a
+                                                            href="category.html">{{ trans('message.category') }}</a></span>
+                                                    <span class="post-by">{{ trans('message.by') }}<a
+                                                            href="author.html">{{ trans('message.author') }}</a></span>
                                                 </div>
                                             </div>
                                         </article>
@@ -511,7 +556,8 @@
                         <div class="row mb-50 mt-15">
                             <div class="col-md-12">
                                 <div class="widget-header position-relative mb-30">
-                                    <h4 class="widget-title mb-0">{{ trans('message.from') }}<span>{{ trans('message.blog') }}</span></h4>
+                                    <h4 class="widget-title mb-0">
+                                        {{ trans('message.from') }}<span>{{ trans('message.blog') }}</span></h4>
                                 </div>
                                 <div class="post-carausel-2 post-module-1 row">
                                     <div class="col">
@@ -523,11 +569,14 @@
                                                     </a>
                                                 </div>
                                                 <div class="pl-10 pr-10">
-                                                    <h5 class="post-title mb-15"><a href="single.html">{{ trans('message.title') }}</a></h5>
+                                                    <h5 class="post-title mb-15"><a
+                                                            href="single.html">{{ trans('message.title') }}</a></h5>
                                                     <div
                                                         class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
-                                                        <span class="post-in"><a href="category.html">{{ trans('message.category') }}</a></span>
-                                                        <span class="post-by">{{ trans('message.by') }}<a href="author.html">{{ trans('message.author') }}</a></span>
+                                                        <span class="post-in"><a
+                                                                href="category.html">{{ trans('message.category') }}</a></span>
+                                                        <span class="post-by">{{ trans('message.by') }}<a
+                                                                href="author.html">{{ trans('message.author') }}</a></span>
                                                     </div>
                                                 </div>
                                             </article>
@@ -542,11 +591,14 @@
                                                     </a>
                                                 </div>
                                                 <div class="pl-10 pr-10">
-                                                    <h5 class="post-title mb-15"><a href="single.html">{{ trans('message.title') }}</a></h5>
+                                                    <h5 class="post-title mb-15"><a
+                                                            href="single.html">{{ trans('message.title') }}</a></h5>
                                                     <div
                                                         class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
-                                                        <span class="post-in"><a href="category.html">{{ trans('message.category') }}</a></span>
-                                                        <span class="post-by">{{ trans('message.by') }}<a href="author.html">{{ trans('message.author') }}</a></span>
+                                                        <span class="post-in"><a
+                                                                href="category.html">{{ trans('message.category') }}</a></span>
+                                                        <span class="post-by">{{ trans('message.by') }}<a
+                                                                href="author.html">{{ trans('message.author') }}</a></span>
                                                     </div>
                                                 </div>
                                             </article>
@@ -561,11 +613,14 @@
                                                     </a>
                                                 </div>
                                                 <div class="pl-10 pr-10">
-                                                    <h5 class="post-title mb-15"><a href="single.html">{{ trans('message.title') }}</a></h5>
+                                                    <h5 class="post-title mb-15"><a
+                                                            href="single.html">{{ trans('message.title') }}</a></h5>
                                                     <div
                                                         class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
-                                                        <span class="post-in"><a href="category.html">{{ trans('message.category') }}</a></span>
-                                                        <span class="post-by">{{ trans('message.by') }}<a href="author.html">{{ trans('message.author') }}</a></span>
+                                                        <span class="post-in"><a
+                                                                href="category.html">{{ trans('message.category') }}</a></span>
+                                                        <span class="post-by">{{ trans('message.by') }}<a
+                                                                href="author.html">{{ trans('message.author') }}</a></span>
                                                     </div>
                                                 </div>
                                             </article>
@@ -580,11 +635,14 @@
                                                     </a>
                                                 </div>
                                                 <div class="pl-10 pr-10">
-                                                    <h5 class="post-title mb-15"><a href="single.html">{{ trans('message.title') }}</a></h5>
+                                                    <h5 class="post-title mb-15"><a
+                                                            href="single.html">{{ trans('message.title') }}</a></h5>
                                                     <div
                                                         class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
-                                                        <span class="post-in"><a href="category.html">{{ trans('message.category') }}</a></span>
-                                                        <span class="post-by">{{ trans('message.by') }}<a href="author.html">{{ trans('message.author') }}</a></span>
+                                                        <span class="post-in"><a
+                                                                href="category.html">{{ trans('message.category') }}</a></span>
+                                                        <span class="post-by">{{ trans('message.by') }}<a
+                                                                href="author.html">{{ trans('message.author') }}</a></span>
                                                     </div>
                                                 </div>
                                             </article>
@@ -599,11 +657,14 @@
                                                     </a>
                                                 </div>
                                                 <div class="pl-10 pr-10">
-                                                    <h5 class="post-title mb-15"><a href="single.html">{{ trans('message.title') }}</a></h5>
+                                                    <h5 class="post-title mb-15"><a
+                                                            href="single.html">{{ trans('message.title') }}</a></h5>
                                                     <div
                                                         class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
-                                                        <span class="post-in"><a href="category.html">{{ trans('message.category') }}</a></span>
-                                                        <span class="post-by">{{ trans('message.by') }}<a href="author.html">{{ trans('message.author') }}</a></span>
+                                                        <span class="post-in"><a
+                                                                href="category.html">{{ trans('message.category') }}</a></span>
+                                                        <span class="post-by">{{ trans('message.by') }}<a
+                                                                href="author.html">{{ trans('message.author') }}</a></span>
                                                     </div>
                                                 </div>
                                             </article>

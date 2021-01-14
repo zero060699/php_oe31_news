@@ -7,6 +7,7 @@
     <title>{{ trans('message.detail_post') }}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="manifest" href="site.html">
     <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/favicon.svg">
     <!-- UltraNews CSS  -->
@@ -64,7 +65,7 @@
                                 <nav>
                                     <ul class="main-menu d-none d-lg-inline">
                                         <li class="menu-item-has-children">
-                                            <a href="index.html">
+                                            <a href="{{ route('home.index') }}">
                                                 <span class="mr-15">
                                                     <ion-icon name="home-outline"></ion-icon>
                                                 </span>{{ trans('message.home') }}
@@ -89,8 +90,7 @@
                                         </li>
                                         @auth
                                             <li>
-                                                <a
-                                                    href="{{ route('authors.create') }}">{{ trans('message.created_post') }}</a>
+                                                <a href="{{ route('authors.create') }}">{{ trans('message.created_post') }}</a>
                                             </li>
                                         @endauth
                                         @guest
@@ -104,22 +104,22 @@
                                                         href="{{ route('register') }}">{{ trans('message.register') }}</a>
                                                 </li>
                                             @endif
-                                        @else
-                                            <li class="nav-item dropdown">
-                                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#"
-                                                    role="button" data-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false" v-pre>
-                                                    {{ Auth::user()->name }}
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right"
-                                                    aria-labelledby="navbarDropdown">
-                                                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                                                        @csrf
-                                                        <button class="btn btn-light"
-                                                            type="submit">{{ trans('message.logout') }}</button>
-                                                    </form>
-                                                </div>
-                                            </li>
+                                            @else
+                                                <li class="nav-item dropdown">
+                                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#"
+                                                        role="button" data-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false" v-pre>
+                                                        {{ Auth::user()->name }}
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-right"
+                                                        aria-labelledby="navbarDropdown">
+                                                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                                            @csrf
+                                                            <button class="btn btn-light"
+                                                                type="submit">{{ trans('message.logout') }}</button>
+                                                        </form>
+                                                    </div>
+                                                </li>
                                         @endguest
                                     </ul>
                                     <div class="d-inline ml-50 tools-icon">
@@ -141,10 +141,10 @@
                                 </nav>
                             </div>
                             <!-- Search -->
-                            <form action="#" method="get"
+                            <form action="{{ route('search') }}" method="GET"
                                 class="search-form d-lg-inline float-right position-relative mr-30 d-none">
-                                <input type="text" class="search_field" placeholder="Search" value="" name="s">
-                                <span class="search-icon"><i class="ti-search mr-5"></i></span>
+                                <input type="text" class="search_field" placeholder="{{ trans('message.search') }}" value="" name="search">
+                                <button type="submit" class="search-icon"><i class="ti-search mr-5"></i></button>
                             </form>
                             <!-- Off canvas -->
                             <div class="off-canvas-toggle-cover">
@@ -160,7 +160,7 @@
         <!-- Main Wrap Start -->
         <main class="position-relative">
             <div class="container">
-                <div class="entry-header entry-header-1 mb-30 mt-50">
+                <div class="entry-header entry-header-1 mb-30 mt-50" data-postid="{{ $post->id }}">
                     <div class="entry-meta meta-0 font-small mb-30"><a href="category.html"><span
                                 class="post-cat bg-success color-white">{{ $post->category->name }}</span></a></div>
                     <h1 class="post-title mb-30">
@@ -169,7 +169,7 @@
                     <div class="entry-meta meta-1 font-x-small color-grey text-uppercase">
                         <span class="post-by">{{ trans('message.by') }}<a
                                 href="author.html">{{ $post->author->name }}</a></span>
-                        <span class="post-on">{{ $post->created_at }}</span>
+                        <span class="post-on">{{ date('M d ,Y', strtotime($post->created_at)) }} {{ trans('message.at') }} {{ date('g:ia', strtotime($post->created_at)) }}</span>
                         <p class="font-x-small mt-10">
                         <div class="hit-count">
                             <i class="far fa-eye"></i>{{ $post->view . trans('message.view') }}
@@ -177,6 +177,20 @@
                         <div class="hit-count">
                             <i class="ti-comment mr-5"></i>{{ $post->comments->count() . trans('message.comment') }}
                         </div>
+                        <div class="count-like">
+                            <i class="far fa-thumbs-up"></i>{{ $post->likes->where('like', config('number_format.view'))->count() . " " . trans('message.like') }}
+                        </div>
+                        <br>
+                        @auth
+                            <div class="interaction">
+                                <button data-post="{{ $post->id }}" class="like"><i class="far fa-thumbs-up"></i>
+                                    {{ trans('message.like') }}
+                                </button> |
+                                <button data-post="{{ $post->id }}" class="dislike"><i class="far fa-thumbs-down"></i>
+                                    {{ trans('message.dislike') }}
+                                </button>
+                            </div>
+                        @endauth
                         </p>
                     </div>
                 </div>
@@ -212,7 +226,7 @@
                                                 class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
                                                 <span class="post-by">{{ trans('message.by') }}<a
                                                         href="author.html">{{ $post->author->name }}</a></span>
-                                                <span class="post-on">{{ $post->created_at }}</span>
+                                                <span class="post-on">{{ date('M d ,Y', strtotime($post->created_at)) }} {{ trans('message.at') }} {{ date('g:ia', strtotime($post->created_at)) }}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -476,6 +490,13 @@
     <script src="{{ asset('../../../unpkg.com/ionicons%405.0.0/dist/ionicons.js') }}"></script>
     <!-- UltraNews JS -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script src="{{ asset('bower-components/components-font-awesome/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/like.js') }}"></script>
+    <script type="text/javascript">
+        var token = '{{ Session::token() }}';
+        var urlLike = '{{ route('like') }}';
+        var urldisLike = '{{ route('dislike') }}';
+    </script>
 </body>
 
 

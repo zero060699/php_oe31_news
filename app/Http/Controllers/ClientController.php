@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Like;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class ClientController extends Controller
 {
@@ -22,6 +25,79 @@ class ClientController extends Controller
         return view('website.frontend.index', compact('posts', 'category'));
     }
 
+    public function filterCategory($id)
+    {
+        $posts = Post::where('category_id', $id)->with('category')->latest()->get();
+        $allCategory = Category::where('parent_id', config('number_format.parent_id'))->get();
+        $allCategory->load('children');
+
+        return view('website.frontend.filter_category', compact('posts', 'allCategory'));
+    }
+
+    public function postLike(Request $request)
+    {
+        $data = $request->all();
+        $postId = $request['post_id'];
+        $post = Post::findOrFail($postId);
+        if (!$post) {
+
+            return null;
+        }
+        $like = Like::where([
+            ['user_id', Auth::id()],
+            ['post_id', $postId]
+        ])->first();
+        if(!$like) {
+            $like = Like::create([
+                'user_id' => Auth::id(),
+                'post_id' => $postId,
+                'like' => config('number_format.like'),
+            ]);
+        }
+        else {
+            $like->delete();
+        }
+
+        return response()->json([
+            'status' => true
+        ]);
+    }
+
+    public function postDisLike(Request $request) {
+        $data = $request->all();
+        $postId = $request['post_id'];
+        $post = Post::findOrFail($postId);
+        if (!$post) {
+
+            return null;
+        }
+        $dislike = Like::where([
+            ['user_id', Auth::id()],
+            ['post_id', $postId],
+        ])->first();
+        if(!$dislike) {
+            $dislike = Like::create([
+                'user_id' => Auth::user()->id,
+                'post_id' => $postId,
+                'like' => config('number_format.dislike'),
+            ]);
+        }
+        else {
+           if ($dislike->like == config('number_format.view')) {
+                $dislike->update([
+                    'user_id' => Auth::user()->id,
+                    'post_id' => $postId,
+                    'like' => config('number_format.dislike'),
+                ]);
+           } else {
+               $dislike->delete();
+           }
+        }
+
+        return response()->json([
+            'status' => true
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      *
