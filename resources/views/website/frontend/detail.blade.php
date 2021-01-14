@@ -10,8 +10,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="manifest" href="site.html">
     <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/favicon.svg">
+
     <!-- UltraNews CSS  -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/widgets.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/color.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
@@ -239,23 +241,18 @@
                             <h3 class="mb-30">{{ $post->comments->count() . trans('message.comment') }}</h3>
                             @foreach ($post->comments as $comment)
                                 <div class="comment-list">
-                                    <div class="single-comment justify-content-between d-flex">
+                                    <div class="single-comment justify-content-between d-flex" id="listcomment">
                                         <div class="user justify-content-between d-flex">
                                             <div class="thumb">
                                                 <img src="{{ asset('images/' . $post->author->image) }}" alt="">
                                             </div>
                                             <div class="desc">
-
                                                 <div class="d-flex justify-content-between">
                                                     <div class="d-flex align-items-center">
                                                         <h5>
                                                             <a href="#">{{ $comment->user->name }}</a>
                                                         </h5>
                                                         <p class="date">{{ $comment->created_at }}</p>
-                                                    </div>
-                                                    <div class="reply-btn">
-                                                        <a href="#"
-                                                            class="btn-reply text-uppercase">{{ trans('message.reply') }}</a>
                                                     </div>
                                                 </div>
                                                 <p class="comment">
@@ -266,28 +263,28 @@
                                     </div>
                                 </div>
                             @endforeach
+
                             <!--comment form-->
                             @auth
                                 <div class="comment-form">
                                     <h3 class="mb-30">{{ trans('message.leave_reply') }}</h3>
-                                    <form class="form-contact comment_form" action=""
-                                        id="commentForm" method="POST">
-                                        @csrf
-                                        <input type="hidden" value="{{ $post->id }}" name="post_id">
+                                        <input type="hidden" value="{{ $post->id }}" name="post_id" id="post_id">
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <textarea class="form-control w-100" name="content" id="content"
                                                         cols="30" rows="9"
-                                                        placeholder="{{ trans('message.write_comment') }}"></textarea>
+                                                        placeholder="{{ trans('message.write_comment') }}">
+                                                    </textarea>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <button type="submit"
-                                                class="button button-contactForm">{{ trans('message.post_comment') }}</button>
-                                        </div>
-                                    </form>
+                                    <div class="form-group">
+                                        <button
+                                            class="button button-contactForm" data-url="{{ route('comments.store') }}">
+                                            {{ trans('message.post_comment') }}
+                                        </button>
+                                    </div>
                                 </div>
                             @endauth
                         </div>
@@ -497,6 +494,7 @@
         var urlLike = '{{ route('like') }}';
         var urldisLike = '{{ route('dislike') }}';
     </script>
+    <script src="{{ asset('js/comment.js') }}"></script>
 </body>
 
 

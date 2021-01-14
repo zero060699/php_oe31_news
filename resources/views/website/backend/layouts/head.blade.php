@@ -29,5 +29,6 @@
     <!-- Custom Theme Style -->
     <link href="{{ asset('adminbackend/build/css/custom.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('bower_components/boostrap/js/src/modal.js') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
      <!-- Styles -->
   </head>
