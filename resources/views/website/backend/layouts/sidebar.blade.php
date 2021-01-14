@@ -28,6 +28,7 @@
                 </a>
                 <ul class="nav child_menu">
                     <li><a href="{{ route('users.index') }}">{{ trans('message.user') }}</a></li>
+                    <li><a href="{{ route('authors.index') }}">{{ trans('message.author') }}</a></li>
                 </ul>
             </li>
             <li>
@@ -36,7 +37,7 @@
                     <span class="fa fa-chevron-down"></span>
                 </a>
                 <ul class="nav child_menu">
-
+                    <li><a href="{{ route('becomeAuth.index') }}">{{ trans('message.author') }}</a></li>
                 </ul>
             </li>
         </ul>

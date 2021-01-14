@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\RequestWriter;
+use App\Models\User;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Auth;
 
@@ -62,6 +64,19 @@ class AuthorController extends Controller
         }
 
         return redirect()->route('home.index');
+    }
+
+    public function requestAuthor(Request $request)
+    {
+        $authorRequest = RequestWriter::create([
+            'note' => $request->note,
+            'status' => config('number_status_post.status_request'),
+            'user_id' => Auth::id(),
+            'role_id' => config('number_status_post.user'),
+        ]);
+        Alert::success(trans('message.success'), trans('message.successfully'));
+
+        return redirect()->back();
     }
     /**
      * Show the form for editing the specified resource.

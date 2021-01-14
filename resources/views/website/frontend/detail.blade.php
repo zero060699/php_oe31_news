@@ -165,24 +165,25 @@
                 <div class="entry-header entry-header-1 mb-30 mt-50" data-postid="{{ $post->id }}">
                     <div class="entry-meta meta-0 font-small mb-30"><a href="category.html"><span
                                 class="post-cat bg-success color-white">{{ $post->category->name }}</span></a></div>
-                    <h1 class="post-title mb-30">
+                    <h1 class="post-title mb-30 title-detail">
                         {{ $post->title }}
                     </h1>
                     <div class="entry-meta meta-1 font-x-small color-grey text-uppercase">
                         <span class="post-by">{{ trans('message.by') }}<a
                                 href="author.html">{{ $post->author->name }}</a></span>
                         <span class="post-on">{{ date('M d ,Y', strtotime($post->created_at)) }} {{ trans('message.at') }} {{ date('g:ia', strtotime($post->created_at)) }}</span>
-                        <p class="font-x-small mt-10">
-                        <div class="hit-count">
-                            <i class="far fa-eye"></i>{{ $post->view . trans('message.view') }}
+                        <div class="font-x-small mt-10 icon-like">
+                            <div class="hit-count">
+                                <i class="far fa-eye"></i>{{ $post->view . trans('message.view') }}
+                            </div>
+                            <div class="hit-count">
+                                <i class="ti-comment mr-5"></i>{{ $post->comments->count() . trans('message.comment') }}
+                            </div>
+                            <div class="hit-count">
+                                <i class="far fa-thumbs-up"></i>{{ $post->likes->where('like', config('number_format.view'))->count() . " " . trans('message.like') }}
+                            </div>
+                            <br>
                         </div>
-                        <div class="hit-count">
-                            <i class="ti-comment mr-5"></i>{{ $post->comments->count() . trans('message.comment') }}
-                        </div>
-                        <div class="count-like">
-                            <i class="far fa-thumbs-up"></i>{{ $post->likes->where('like', config('number_format.view'))->count() . " " . trans('message.like') }}
-                        </div>
-                        <br>
                         @auth
                             <div class="interaction">
                                 <button data-post="{{ $post->id }}" class="like"><i class="far fa-thumbs-up"></i>
@@ -193,7 +194,7 @@
                                 </button>
                             </div>
                         @endauth
-                        </p>
+
                     </div>
                 </div>
                 <!--end entry header-->
@@ -205,7 +206,7 @@
                         </div>
                         <!--related posts-->
                         <div class="related-posts">
-                            <h3 class="mb-30">{{ trans('message.related_post') }}</h3>
+                            <h4 class="mb-30">{{ trans('message.related_post') }}</h4>
                             <div class="row">
                                 <article class="col-lg-4">
                                     <div class="background-white border-radius-10 p-10 mb-30">
@@ -238,7 +239,7 @@
                         </div>
                         <!--Comments-->
                         <div class="comments-area">
-                            <h3 class="mb-30">{{ $post->comments->count() . trans('message.comment') }}</h3>
+                            <h4 class="mb-30">{{ $post->comments->count() . trans('message.comment') }}</h4>
                             @foreach ($post->comments as $comment)
                                 <div class="comment-list">
                                     <div class="single-comment justify-content-between d-flex" id="listcomment">
@@ -267,7 +268,7 @@
                             <!--comment form-->
                             @auth
                                 <div class="comment-form">
-                                    <h3 class="mb-30">{{ trans('message.leave_reply') }}</h3>
+                                    <h4 class="mb-30">{{ trans('message.leave_reply') }}</h4>
                                         <input type="hidden" value="{{ $post->id }}" name="post_id" id="post_id">
                                         <div class="row">
                                             <div class="col-12">

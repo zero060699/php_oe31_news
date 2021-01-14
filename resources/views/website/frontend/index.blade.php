@@ -170,6 +170,9 @@
                                                         <button class="btn btn-light"
                                                             type="submit">{{ trans('message.logout') }}</button>
                                                     </form>
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#author">
+                                                        {{ trans('message.become_author') }}
+                                                    </button>
                                                 </div>
                                             </li>
                                         @endguest
@@ -703,6 +706,34 @@
             <!-- Footer End-->
         </footer>
     </div> <!-- Main Wrap End-->
+    <div class="modal fade" id="author" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('requestAuthor') }}" method="POST">
+                    @csrf
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align">{{ trans('message.title') }}</label>
+                        <div class="col-md-6 col-sm-6 ">
+                            <input type="text" id="note" name="note" required="required" class="form-control "
+                                placeholder=" Title ...">
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('message.close') }}</button>
+              <button type="submit" class="btn btn-primary">{{ trans('message.save') }}</button>
+            </div>
+        </form>
+          </div>
+        </div>
+      </div>
     <div class="dark-mark"></div>
     <!-- Vendor JS-->
     <script src="{{ asset('assets/js/vendor/modernizr-3.5.0.min.js') }}"></script>
