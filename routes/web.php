@@ -25,6 +25,7 @@ Route::group(['middleware' => ['localization']], function () {
     Route::get('/search', 'PostController@search')->name('search');
     Route::post('/like', 'ClientController@postLike')->name('like');
     Route::post('/dislike', 'ClientController@postDisLike')->name('dislike');
+    Route::resource('comments', 'CommentController');
 });
 Route::get('change-languages/{language}', 'LangController@changeLanguage')->name('change-languages');
 Auth::routes();
