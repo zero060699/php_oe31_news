@@ -91,9 +91,11 @@
                                             </div>
                                         </li>
                                         @auth
-                                            <li>
-                                                <a href="{{ route('authors.create') }}">{{ trans('message.created_post') }}</a>
-                                            </li>
+                                            @can('create_post')
+                                                <li>
+                                                    <a href="{{ route('authors.create') }}">{{ trans('message.create_post') }}</a>
+                                                </li>
+                                            @endcan
                                         @endauth
                                         @guest
                                             <li class="nav-item">

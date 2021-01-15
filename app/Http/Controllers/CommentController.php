@@ -8,6 +8,10 @@ use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 class CommentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(Post $post)
     {
         return response()->json($post->comments()->with('user')->latest()->get());

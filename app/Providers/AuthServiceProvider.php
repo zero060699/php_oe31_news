@@ -13,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        // 'App\Model' => 'App\Policies\ModelPolicy',
+        //'App\Model' => 'App\Policies\ModelPolicy',
     ];
 
     /**
@@ -24,7 +24,22 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+        Gate::before(function ($user) {
+            if ($user->role_id === config('number_status_post.author')) {
+                return true;
+            }
+        });
 
-        //
+        Gate::allows('create_post', function ($user) {
+            if ($user->role_id === config('number_status_post.author')) {
+                return true;
+            }
+        });
+
+        Gate::allows('become_author', function ($user) {
+            if ($user->role_id === config('number_status_post.user')) {
+                return true;
+            }
+        });
     }
 }

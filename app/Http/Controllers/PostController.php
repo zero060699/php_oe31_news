@@ -13,6 +13,11 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin')->except(['show', 'search']);
+        $this->middleware('auth')->except('show');
+    }
     /**
      * Display a listing of the resource.
      *

@@ -5,11 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Comment;
+use Illuminate\Auth\Access\Gate;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Http\Response;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +22,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $items = Category::where('parent_id', config('number_format.parent_id'))->get();
+        $items = Category::where('parent_id', config('number_format.parent_id'))->paginate(config('number_status_post.paginate_home'));
 
         return view('website.backend.category.index', compact('items'));
     }
