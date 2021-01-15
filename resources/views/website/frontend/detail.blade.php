@@ -123,23 +123,21 @@
                                                     </div>
                                                 </li>
                                         @endguest
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="menu">
+                                                    <ul class="list-menu">
+                                                        <li class="li-menu">
+                                                            <a href="{{ route('change-languages', ['language' => 'en']) }}">{{ trans('message.en') }}</a>
+                                                        </li>
+                                                        <li class="li-menu">
+                                                            <a href="{{ route('change-languages', ['language' => 'vi']) }}">{{ trans('message.vi') }}</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </ul>
-                                    <div class="d-inline ml-50 tools-icon">
-                                        <a class="red-tooltip text-danger" href="#" data-toggle="tooltip"
-                                            data-placement="top" title="" data-original-title="Hot Topics">
-                                            <ion-icon name="flame-outline"></ion-icon>
-                                        </a>
-                                        <a class="red-tooltip text-primary" href="#" data-toggle="tooltip"
-                                            data-placement="top" title="" data-original-title="Trending">
-                                            <ion-icon name="flash-outline"></ion-icon>
-                                        </a>
-                                        <a class="red-tooltip text-success" href="#" data-toggle="tooltip"
-                                            data-placement="top" title="" data-original-title="Notifications">
-                                            <ion-icon name="notifications-outline"></ion-icon>
-                                            {{-- Notification
-                                            --}}
-                                        </a>
-                                    </div>
                                 </nav>
                             </div>
                             <!-- Search -->
