@@ -14,4 +14,9 @@ class Role extends Model
     {
         return $this->belongsToMany(Role::class);
     }
+
+    public function requestsWriter()
+    {
+        return $this->hasMany(RequestWriter::class);
+    }
 }
