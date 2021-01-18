@@ -173,7 +173,13 @@
                                                 </div>
                                             </li>
                                         @endguest
-                                    </ul>
+                                            <li class="mega-menu-item">
+                                                <a href="{{ route('change-languages', ['language' => 'en']) }}">{{ trans('message.en') }}</a>
+                                            </li>
+                                            <li class="mega-menu-item">
+                                                <a href="{{ route('change-languages', ['language' => 'vi']) }}">{{ trans('message.vi') }}</a>
+                                            </li>
+                                        </ul>
 
                                     {{-- Notification --}}
                                 </nav>
@@ -557,7 +563,7 @@
                             <div class="col-md-12">
                                 <div class="widget-header position-relative mb-30">
                                     <h4 class="widget-title mb-0">
-                                        {{ trans('message.from') }}<span>{{ trans('message.blog') }}</span></h4>
+                                        {{ trans('message.all') }}<span>{{ trans('message.post') }}</span></h4>
                                 </div>
                                 <div class="post-carausel-2 post-module-1 row">
                                     <div class="col">
