@@ -35,10 +35,14 @@ class CommentController extends Controller
             $data['message'] = trans("message.success");
             $data['content'] = $request->content;
             $data['username'] = Auth::user()->name;
+            $data['image'] = Auth::user()->image;
+            $data['created_at'] = $check->created_at;
 
             return view ('website.frontend.ajax_comment', compact('data'));
         }
 
-        return json_encode($data);
+        return response()->json([
+            'data' => $data
+        ]);
     }
 }

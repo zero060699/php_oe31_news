@@ -239,9 +239,10 @@
                         </div>
                         <!--Comments-->
                         <div class="comments-area">
-                            <h4 class="mb-30">{{ $post->comments->count() . trans('message.comment') }}</h4>
-                            @foreach ($post->comments as $comment)
-                                <div class="comment-list">
+                        <h3 class="mb-30">{{ $post->comments->count() . trans('message.comment') }}</h3>
+                            <div class="comment-list">
+                                @foreach ($post->comments as $comment)
+
                                     <div class="single-comment justify-content-between d-flex" id="listcomment">
                                         <div class="user justify-content-between d-flex">
                                             <div class="thumb">
@@ -262,8 +263,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            @endforeach
+                                @endforeach
+                            </div>
 
                             <!--comment form-->
                             @auth
