@@ -172,6 +172,7 @@
                                                         <button class="btn btn-light"
                                                             type="submit">{{ trans('message.logout') }}</button>
                                                     </form>
+                                                    <a href="{{ route('postAuthor', [Auth::user()->id]) }}">{{ trans('message.my_post') }}</a>
                                                     @cannot('become_author')
                                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#author">
                                                             {{ trans('message.become_author') }}
