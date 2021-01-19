@@ -3,6 +3,7 @@
 
 
 <!-- Mirrored from demos.alithemes.com/html/newsviral/category-grid.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 25 Oct 2020 07:34:48 GMT -->
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -16,7 +17,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/widgets.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/color.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
-    <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('bower_components/components-font-awesome/jquery/dist/jquery.min.js') }}"></script>
 </head>
 
 <body>
@@ -26,7 +27,7 @@
             <div class="preloader-inner position-relative">
                 <div class="text-center">
                     <img class="jump mb-50" src="{{ asset('assets/imgs/loading.svg') }}" alt="">
-                    <h6>Now Loading</h6>
+                    <h6>{{ trans('message.now_loading') }}</h6>
                     <div class="loader">
                         <div class="bar bar1"></div>
                         <div class="bar bar2"></div>
@@ -52,12 +53,14 @@
                                 <div class="d-flex">
                                     <div class="post-thumb d-flex mr-15 border-radius-5 img-hover-scale">
                                         <a class="color-white" href="single.html">
-                                            <img src="assets/imgs/thumbnail-2.jpg" alt="">
+                                            <img src="{{ asset('assets/imgs/thumbnail-2.jpg') }}" alt="">
                                         </a>
                                     </div>
                                     <div class="post-content media-body">
-                                        <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">Vancouver woman finds pictures and videos of herself online</a></h6>
-                                        <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
+                                        <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">Vancouver
+                                                woman finds pictures and videos of herself online</a></h6>
+                                        <div
+                                            class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
                                             <span class="post-by">By <a href="author.html">K. Marry</a></span>
                                             <span class="post-on">4m ago</span>
                                         </div>
@@ -72,8 +75,10 @@
                                         </a>
                                     </div>
                                     <div class="post-content media-body">
-                                        <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">4 Things Emotionally Intelligent People Don’t Do</a></h6>
-                                        <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
+                                        <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">4 Things
+                                                Emotionally Intelligent People Don’t Do</a></h6>
+                                        <div
+                                            class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
                                             <span class="post-by">By <a href="author.html">Mr. John</a></span>
                                             <span class="post-on">3h ago</span>
                                         </div>
@@ -88,8 +93,10 @@
                                         </a>
                                     </div>
                                     <div class="post-content media-body">
-                                        <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">Reflections from a Token Black Friend</a></h6>
-                                        <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
+                                        <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">Reflections
+                                                from a Token Black Friend</a></h6>
+                                        <div
+                                            class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
                                             <span class="post-by">By <a href="author.html">Kenedy</a></span>
                                             <span class="post-on">4h ago</span>
                                         </div>
@@ -104,8 +111,10 @@
                                         </a>
                                     </div>
                                     <div class="post-content media-body">
-                                        <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">How to Identify a Smart Person in 3 Minutes</a></h6>
-                                        <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
+                                        <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">How to
+                                                Identify a Smart Person in 3 Minutes</a></h6>
+                                        <div
+                                            class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
                                             <span class="post-by">By <a href="author.html">Steven</a></span>
                                             <span class="post-on">5h ago</span>
                                         </div>
@@ -120,8 +129,10 @@
                                         </a>
                                     </div>
                                     <div class="post-content media-body">
-                                        <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">Blackface Minstrel Songs Don’t Belong in Children’s Music Class</a></h6>
-                                        <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
+                                        <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">Blackface
+                                                Minstrel Songs Don’t Belong in Children’s Music Class</a></h6>
+                                        <div
+                                            class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
                                             <span class="post-by">By <a href="author.html">J.Smith</a></span>
                                             <span class="post-on">5h30 ago</span>
                                         </div>
@@ -152,14 +163,6 @@
                     </div>
                 </div>
                 <!--Ads-->
-                <div class="sidebar-widget widget-ads mb-30">
-                    <div class="widget-header tags-close mb-20">
-                        <h5 class="widget-title mt-5">Your Ads Here</h5>
-                    </div>
-                    <a href="assets/imgs/news-1.jpg" class="play-video" data-animate="zoomIn" data-duration="1.5s" data-delay="0.1s">
-                        <img class="border-radius-10" src="assets/imgs/ads-1.jpg" alt="">
-                    </a>
-                </div>
             </div>
         </aside>
         <!-- Main Header -->
@@ -207,22 +210,30 @@
                                             <div class="sub-mega-menu sub-menu-list row text-muted font-small">
                                                 @foreach ($allCategory as $item)
                                                     <ul class="col-md-2">
-                                                        <li><strong>{{ $item->name }}</strong></li>
+                                                        <li><a
+                                                                href="{{ route('filterCategory', [$item->id]) }}"><strong>{{ $item->name }}</strong></a>
+                                                        </li>
                                                         @foreach ($item->children as $child)
-                                                            <li><a href="category.html">{{ $child->name }}</a></li>
+                                                            <li><a
+                                                                    href="{{ route('filterCategory', [$item->id]) }}">{{ $child->name }}</a>
+                                                            </li>
                                                         @endforeach
                                                     </ul>
                                                 @endforeach
                                             </div>
                                         </li>
                                         @auth
-                                            <li>
-                                                <a href="{{ route('authors.create') }}">{{ trans('message.create_post') }}</a>
-                                            </li>
+                                            @if (Auth::user()->role_id != config('number_status_post.user'))
+                                                <li>
+                                                    <a
+                                                        href="{{ route('authors.create') }}">{{ trans('message.create_post') }}</a>
+                                                </li>
+                                            @endif
                                         @endauth
                                         @guest
                                             <li class="nav-item">
-                                                <a class="nav-link" href="{{ route('login') }}">{{ trans('message.login') }}</a>
+                                                <a class="nav-link"
+                                                    href="{{ route('login') }}">{{ trans('message.login') }}</a>
                                             </li>
                                             @if (Route::has('register'))
                                                 <li class="nav-item">
@@ -232,11 +243,13 @@
                                             @endif
                                         @else
                                             <li class="nav-item dropdown">
-                                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#"
+                                                    role="button" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false" v-pre>
                                                     {{ Auth::user()->name }}
                                                 </a>
-                                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                                <div class="dropdown-menu dropdown-menu-right"
+                                                    aria-labelledby="navbarDropdown">
                                                     <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                                         @csrf
                                                         <button class="btn btn-light"
@@ -251,18 +264,19 @@
                                 </nav>
                             </div>
 
-                           <!-- Search -->
-                           <form action="{{ route('search') }}" method="GET"
-                           class="search-form d-lg-inline float-right position-relative mr-30 d-none">
-                           <input type="text" class="search_field" placeholder="{{ trans('message.search') }}" value="" name="search">
-                           <button type="submit" class="search-icon"><i class="ti-search mr-5"></i></button>
-                       </form>
-                       <!-- Off canvas -->
-                       <div class="off-canvas-toggle-cover">
-                           <div class="off-canvas-toggle hidden d-inline-block ml-15" id="off-canvas-toggle">
-                               <ion-icon name="grid-outline"></ion-icon>
-                           </div>
-                       </div>
+                            <!-- Search -->
+                            <form action="{{ route('search') }}" method="GET"
+                                class="search-form d-lg-inline float-right position-relative mr-30 d-none">
+                                <input type="text" class="search_field" placeholder="{{ trans('message.search') }}"
+                                    value="" name="search">
+                                <button type="submit" class="search-icon"><i class="ti-search mr-5"></i></button>
+                            </form>
+                            <!-- Off canvas -->
+                            <div class="off-canvas-toggle-cover">
+                                <div class="off-canvas-toggle hidden d-inline-block ml-15" id="off-canvas-toggle">
+                                    <ion-icon name="grid-outline"></ion-icon>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -272,17 +286,17 @@
         <!-- Main Wrap Start -->
         <main class="position-relative">
             <div class="archive-header text-center mb-50">
-                @foreach ($posts as $post)
-                    <div class="container">
-                        <h2><span class="text-danger">{{ $post->category->name }}</span></h2>
-                        <div class="breadcrumb">
-                            <span class="no-arrow">{{ trans('message.you_are_here') }}</span>
-                            <a href="{{ route('authors.index') }}" rel="nofollow">{{ trans('message.home') }}</a>
-                            <span></span>
-                           {{ $post->category->name }}
-                        </div>
+
+                <div class="container">
+                    <h2><span class="text-danger">{{ $category->name }}</span></h2>
+                    <div class="breadcrumb">
+                        <span class="no-arrow">{{ trans('message.you_are_here') }}</span>
+                        <a href="{{ route('authors.index') }}" rel="nofollow">{{ trans('message.home') }}</a>
+                        <span></span>
+                        {{ $category->name }}
                     </div>
-                @endforeach
+                </div>
+
             </div>
             <div class="container">
                 <div class="row">
@@ -293,9 +307,10 @@
                         <div class="sidebar-widget widget_categories_2 border-radius-10 bg-white mb-30">
                             @foreach ($allCategory as $item)
                                 <ul class="font-small text-muted">
-                                    <li class="cat-item cat-item-2 active"><a href="{{ route('filterCategory', [$item->id]) }}"><span class="mr-10">
-                                        <ion-icon name="earth-outline"></ion-icon>
-                                    </span>{{ $item->name }}</a></li>
+                                    <li class="cat-item cat-item-2 active"><a
+                                            href="{{ route('filterCategory', [$item->id]) }}"><span class="mr-10">
+                                                <ion-icon name="earth-outline"></ion-icon>
+                                            </span>{{ $item->name }}</a></li>
                                 </ul>
                             @endforeach
                         </div>
@@ -305,11 +320,13 @@
                                 <h5 class="widget-title"><strong>{{ trans('message.category') }}</strong></h5>
                             </div>
                             @foreach ($allCategory as $item)
-                            <ul class="font-small text-muted">
-                                @foreach ($item->children as $child)
-                                <li class="cat-item cat-item-2"><a href="{{ route('filterCategory', [$child->id]) }}">{{ $child->name }}</a></li>
-                                @endforeach
-                            </ul>
+                                <ul class="font-small text-muted">
+                                    @foreach ($item->children as $child)
+                                        <li class="cat-item cat-item-2"><a
+                                                href="{{ route('filterCategory', [$child->id]) }}">{{ $child->name }}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
                             @endforeach
                         </div>
                     </div>
@@ -319,62 +336,89 @@
                             <div class="col-lg-8 col-md-12">
                                 <div class="latest-post mb-50">
                                     <div class="loop-grid">
-                                        @foreach ($posts as $lastPost)
-                                        <article class="first-post p-10 background-white border-radius-10 mb-30 wow fadeIn animated">
-                                            <div class="img-hover-slide border-radius-15 mb-30 position-relative overflow-hidden">
-                                                <span class="top-right-icon bg-dark"><i class="mdi mdi-flash-on"></i></span>
-                                                <a href="single.html">
-                                                    <img src="{{ asset(config('image_user.image') .'/'. $lastPost->image) }}" alt="post-slider">
-                                                </a>
-                                            </div>
-                                            <div class="pr-10 pl-10">
-                                                <div class="entry-meta mb-30">
-                                                    <a class="entry-meta meta-0" href="{{ route('filterCategory', [$lastPost->id]) }}"><span class="post-in background4 text-danger font-x-small">{{ $lastPost->category->name }}</span></a>
-                                                    <div class="float-right font-small">
-                                                        <span>
-                                                            <span class="mr-10 text-muted">
-                                                            <i class="fa fa-eye" aria-hidden="true"></i>
-                                                        </span>{{ $lastPost->view }}
-                                                    </span>
-                                                        <span class="ml-30"><span class="mr-10 text-muted">
-                                                            <i class="fa fa-comment" aria-hidden="true"></i></span>{{ $lastPost->comments->count() }}</span>
+                                        @foreach ($category->posts as $lastPost)
+                                            <article
+                                                class="first-post p-10 background-white border-radius-10 mb-30 wow fadeIn animated">
+                                                <div
+                                                    class="img-hover-slide border-radius-15 mb-30 position-relative overflow-hidden">
+                                                    <span class="top-right-icon bg-dark"><i
+                                                            class="mdi mdi-flash-on"></i></span>
+                                                    <a href="{{ route('posts.show', [$lastPost->id]) }}">
+                                                        <img src="{{ asset(config('image_user.image') . '/' . $lastPost->image) }}"
+                                                            alt="post-slider">
+                                                    </a>
+                                                </div>
+                                                <div class="pr-10 pl-10">
+                                                    <div class="entry-meta mb-30">
+                                                        <a class="entry-meta meta-0"
+                                                            href="{{ route('filterCategory', [$lastPost->id]) }}"><span
+                                                                class="post-in background4 text-danger font-x-small">{{ $lastPost->category->name }}</span></a>
+                                                        <div class="float-right font-small">
+                                                            <span>
+                                                                <span class="mr-10 text-muted">
+                                                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                                                </span>{{ $lastPost->view }}
+                                                            </span>
+                                                            <span class="ml-30"><span class="mr-10 text-muted">
+                                                                    <i class="fa fa-comment"
+                                                                        aria-hidden="true"></i></span>{{ $lastPost->comments->count() }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <h4 class="post-title mb-20">
+                                                        <a
+                                                            href="{{ route('posts.show', [$lastPost->id]) }}">{{ $lastPost->title }}</a>
+                                                    </h4>
+                                                    <div class="mb-20 overflow-hidden">
+                                                        <div
+                                                            class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
+                                                            <span class="post-by">By <a
+                                                                    href="author.html">{{ $lastPost->author->name }}</a></span>
+                                                            <span
+                                                                class="post-on">{{ date('F d, Y', strtotime($lastPost->created_at)) }}
+                                                                at
+                                                                {{ date('g:ia', strtotime($lastPost->created_at)) }}</span>
+                                                        </div>
+                                                        <div class="float-right">
+                                                            <a href="single.html" class="read-more"><span
+                                                                    class="mr-10"><i class="fa fa-thumbtack"
+                                                                        aria-hidden="true"></i></span>{{ trans('message.latest_post') }}</a>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <h4 class="post-title mb-20">
-                                                    <a href="{{ route('posts.show', [$lastPost->id]) }}">{{ $lastPost->title }}</a></h4>
-                                                <div class="mb-20 overflow-hidden">
-                                                    <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                        <span class="post-by">By <a href="author.html">{{ $lastPost->author->name }}</a></span>
-                                                        <span class="post-on">{{ date('F d, Y', strtotime($post->created_at)) }} at {{ date('g:ia', strtotime($post->created_at)) }}</span>
-                                                    </div>
-                                                    <div class="float-right">
-                                                        <a href="single.html" class="read-more"><span class="mr-10"><i class="fa fa-thumbtack" aria-hidden="true"></i></span>{{ trans('message.latest_post') }}</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </article>
+                                            </article>
                                         @endforeach
                                         <div class="row">
                                             @foreach ($posts as $post)
                                                 <article class="col-lg-6 col-md-12 wow fadeIn animated">
                                                     <div class="background-white border-radius-10 p-10 mb-30">
-                                                        <div class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
-                                                            <a href="single.html">
-                                                                <img class="border-radius-15" src="{{ asset(config('image_user.image') .'/'. $post->image) }}" alt="">
+                                                        <div
+                                                            class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
+                                                            <a href="{{ route('posts.show', [$post->id]) }}">
+                                                                <img class="border-radius-15"
+                                                                    src="{{ asset(config('image_user.image') . '/' . $post->image) }}"
+                                                                    alt="">
                                                             </a>
                                                         </div>
                                                         <div class="pl-10 pr-10">
                                                             <div class="entry-meta mb-15 mt-10">
-                                                                <a class="entry-meta meta-2" href="category.html"><span class="post-in text-primary font-x-small">{{ $post->category->name }}</span></a>
+                                                                <a class="entry-meta meta-2" href="category.html"><span
+                                                                        class="post-in text-primary font-x-small">{{ $post->category->name }}</span></a>
                                                             </div>
                                                             <h5 class="post-title mb-15">
                                                                 <span class="post-format-icon">
                                                                     <ion-icon name="image-outline"></ion-icon>
                                                                 </span>
-                                                                <a href="{{ route('posts.show', [$post->id]) }}">{{ $post->title }}</a></h5>
-                                                            <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
-                                                                <span class="post-by">By <a href="author.html">{{ $post->author->name }}</a></span>
-                                                                <span class="post-on">{{ date('F d, Y', strtotime($post->created_at)) }} at {{ date('g:ia', strtotime($post->created_at)) }}</span>
+                                                                <a
+                                                                    href="{{ route('posts.show', [$post->id]) }}">{{ $post->title }}</a>
+                                                            </h5>
+                                                            <div
+                                                                class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
+                                                                <span class="post-by">By <a
+                                                                        href="author.html">{{ $post->author->name }}</a></span>
+                                                                <span
+                                                                    class="post-on">{{ date('F d, Y', strtotime($post->created_at)) }}
+                                                                    at
+                                                                    {{ date('g:ia', strtotime($post->created_at)) }}</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -383,32 +427,23 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="pagination-area mb-30">
-                                    <nav aria-label="Page navigation example">
-                                        <ul class="pagination justify-content-start">
-                                            <li class="page-item"><a class="page-link" href="#"><i class="ti-angle-left"></i></a></li>
-                                            <li class="page-item active"><a class="page-link" href="#">01</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">02</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">03</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">04</a></li>
-                                            <li class="page-item"><a class="page-link" href="#"><i class="ti-angle-right"></i></a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
                             </div>
                             <div class="col-lg-4 col-md-12 sidebar-right">
                                 <div class="sidebar-widget">
                                     <div class="widget-header mb-30">
                                         <h5 class="widget-title">
-                                            {{ trans('message.top') }}<span>{{ trans('message.trending') }}</span></h5>
+                                            {{ trans('message.top') }}<span>{{ trans('message.trending') }}</span>
+                                        </h5>
                                     </div>
                                     <div class="post-aside-style-2">
                                         <ul class="list-post">
                                             <li class="mb-30 wow fadeIn animated">
                                                 <div class="d-flex">
-                                                    <div class="post-thumb d-flex mr-15 border-radius-5 img-hover-scale">
+                                                    <div
+                                                        class="post-thumb d-flex mr-15 border-radius-5 img-hover-scale">
                                                         <a class="color-white" href="single.html">
-                                                            <img src="{{ asset('assets/imgs/thumbnail-2.jpg') }}" alt="">
+                                                            <img src="{{ asset('assets/imgs/thumbnail-2.jpg') }}"
+                                                                alt="">
                                                         </a>
                                                     </div>
                                                     <div class="post-content media-body">
@@ -424,9 +459,11 @@
                                             </li>
                                             <li class="mb-30 wow fadeIn animated">
                                                 <div class="d-flex">
-                                                    <div class="post-thumb d-flex mr-15 border-radius-5 img-hover-scale">
+                                                    <div
+                                                        class="post-thumb d-flex mr-15 border-radius-5 img-hover-scale">
                                                         <a class="color-white" href="single.html">
-                                                            <img src="{{ asset('assets/imgs/thumbnail-2.jpg') }}" alt="">
+                                                            <img src="{{ asset('assets/imgs/thumbnail-2.jpg') }}"
+                                                                alt="">
                                                         </a>
                                                     </div>
                                                     <div class="post-content media-body">
@@ -442,9 +479,11 @@
                                             </li>
                                             <li class="mb-30 wow fadeIn animated">
                                                 <div class="d-flex">
-                                                    <div class="post-thumb d-flex mr-15 border-radius-5 img-hover-scale">
+                                                    <div
+                                                        class="post-thumb d-flex mr-15 border-radius-5 img-hover-scale">
                                                         <a class="color-white" href="single.html">
-                                                            <img src="{{ asset('assets/imgs/thumbnail-2.jpg') }}" alt="">
+                                                            <img src="{{ asset('assets/imgs/thumbnail-2.jpg') }}"
+                                                                alt="">
                                                         </a>
                                                     </div>
                                                     <div class="post-content media-body">
@@ -469,14 +508,19 @@
                                         <article class="bg-white border-radius-15 mb-30 p-10 wow fadeIn animated">
                                             <div class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
                                                 <a href="single.html">
-                                                    <video autoplay="" class="photo-item__video" loop="" muted="" preload="none">
-                                                        <source src="https://player.vimeo.com/external/210754416.sd.mp4?s=826dbe91a402d3fc239674b6595a0100b2a45098&amp;profile_id=164&amp;oauth2_token_id=57447761" type="video/mp4">
+                                                    <video autoplay="" class="photo-item__video" loop="" muted=""
+                                                        preload="none">
+                                                        <source
+                                                            src="https://player.vimeo.com/external/210754416.sd.mp4?s=826dbe91a402d3fc239674b6595a0100b2a45098&amp;profile_id=164&amp;oauth2_token_id=57447761"
+                                                            type="video/mp4">
                                                     </video>
                                                 </a>
                                             </div>
                                             <div class="pl-10 pr-10">
-                                                <h5 class="post-title mb-15"><a href="single.html">Vancouver woman finds pictures and videos of herself online</a></h5>
-                                                <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
+                                                <h5 class="post-title mb-15"><a href="single.html">Vancouver woman finds
+                                                        pictures and videos of herself online</a></h5>
+                                                <div
+                                                    class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
                                                     <span class="post-in">In <a href="category.html">Global</a></span>
                                                     <span class="post-by">By <a href="author.html">K. Marry</a></span>
                                                     <span class="post-on">4m ago</span>
@@ -490,8 +534,10 @@
                                                 </a>
                                             </div>
                                             <div class="pl-10 pr-10">
-                                                <h5 class="post-title mb-15"><a href="single.html">Fight breaks out at Disneyland</a></h5>
-                                                <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
+                                                <h5 class="post-title mb-15"><a href="single.html">Fight breaks out at
+                                                        Disneyland</a></h5>
+                                                <div
+                                                    class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
                                                     <span class="post-in">In <a href="category.html">Healthy</a></span>
                                                     <span class="post-by">By <a href="author.html">Steven</a></span>
                                                     <span class="post-on">14m ago</span>
@@ -505,8 +551,11 @@
                                                 </a>
                                             </div>
                                             <div class="pl-10 pr-10">
-                                                <h5 class="post-title mb-15"><a href="single.html">California sheriff’s deputy shot during ‘ambush’ at police station, officials say</a></h5>
-                                                <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
+                                                <h5 class="post-title mb-15"><a href="single.html">California sheriff’s
+                                                        deputy shot during ‘ambush’ at police station, officials say</a>
+                                                </h5>
+                                                <div
+                                                    class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
                                                     <span class="post-in">In <a href="category.html">US</a></span>
                                                     <span class="post-by">By <a href="author.html">Murler</a></span>
                                                     <span class="post-on">16m ago</span>
@@ -557,7 +606,8 @@
     <script src="{{ asset('assets/js/vendor/animated.headline.js') }}"></script>
     <script src="{{ asset('assets/js/vendor/jquery.magnific-popup.js') }}"></script>
     <script src="{{ asset('assets/js/vendor/jquery.ticker.js') }}"></script>
-    <script src="{{ asset('assets/js/vendor/jquery.vticker-min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/vendor/jquery.vticker-min.js') }}"></script>
+    --}}
     <script src="{{ asset('assets/js/vendor/jquery.scrollUp.min.js') }}"></script>
     <script src="{{ asset('assets/js/vendor/jquery.nice-select.min.js') }}"></script>
     <script src="{{ asset('assets/js/vendor/jquery.sticky.js') }}"></script>
@@ -565,11 +615,14 @@
     <script src="{{ asset('assets/js/vendor/waypoints.min.js') }}"></script>
     <script src="{{ asset('assets/js/vendor/jquery.counterup.min.js') }}"></script>
     <script src="{{ asset('assets/js/vendor/jquery.theia.sticky.js') }}"></script>
-    <script src="{{ asset('../../../unpkg.com/ionicons%405.0.0/dist/ionicons.js') }}"></script>
+    {{-- <script
+        src="{{ asset('../../../unpkg.com/ionicons%405.0.0/dist/ionicons.js') }}"></script>
+    --}}
     <!-- UltraNews JS -->
     <script src="{{ asset('assets/js/main2.js') }}"></script>
 </body>
 
 
 <!-- Mirrored from demos.alithemes.com/html/newsviral/category-grid.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 25 Oct 2020 07:34:48 GMT -->
+
 </html>

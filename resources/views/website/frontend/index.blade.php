@@ -135,18 +135,20 @@
                                             <div class="sub-mega-menu sub-menu-list row text-muted font-small">
                                                 @foreach ($category as $item)
                                                     <ul class="col-md-2">
-                                                        <li><strong>{{ $item->name }}</strong></li>
+                                                        <li><a href="{{ route('filterCategory', [$item->id]) }}"><strong>{{ $item->name }}</strong></a></li>
                                                         @foreach ($item->children as $child)
-                                                            <li><a href="category.html">{{ $child->name }}</a></li>
+                                                            <li><a href="{{ route('filterCategory', [$item->id]) }}">{{ $child->name }}</a></li>
                                                         @endforeach
                                                     </ul>
                                                 @endforeach
                                             </div>
                                         </li>
                                         @auth
-                                            <li>
-                                                <a href="{{ route('authors.create') }}">{{ trans('message.create_post') }}</a>
-                                            </li>
+                                            @can('create_post')
+                                                <li>
+                                                    <a href="{{ route('authors.create') }}">{{ trans('message.create_post') }}</a>
+                                                </li>
+                                            @endcan
                                         @endauth
                                         @guest
                                             <li class="nav-item">
@@ -158,7 +160,7 @@
                                                         href="{{ route('register') }}">{{ trans('message.register') }}</a>
                                                 </li>
                                             @endif
-                                        @else
+                                            @else
                                             <li class="nav-item dropdown">
                                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -170,9 +172,11 @@
                                                         <button class="btn btn-light"
                                                             type="submit">{{ trans('message.logout') }}</button>
                                                     </form>
-                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#author">
-                                                        {{ trans('message.become_author') }}
-                                                    </button>
+                                                    @cannot('become_author')
+                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#author">
+                                                            {{ trans('message.become_author') }}
+                                                        </button>
+                                                    @endcannot
                                                 </div>
                                             </li>
                                         @endguest

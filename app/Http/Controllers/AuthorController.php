@@ -8,10 +8,16 @@ use App\Models\Category;
 use App\Models\RequestWriter;
 use App\Models\User;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class AuthorController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -29,6 +35,9 @@ class AuthorController extends Controller
      */
     public function create()
     {
+        if(!Gate::allows('create_post')) {
+            abort(Response::HTTP_FORBIDDEN);
+        }
         $category = Category::all();
         $category->load('children');
 
@@ -53,7 +62,7 @@ class AuthorController extends Controller
                 'content' => $request->content,
                 'category_id' => $request->category_id,
                 'view' => config('number_status_post.view'),
-                'user_id' => Auth::user()->id,
+                'user_id' => Auth::id(),
                 'image'=> $fileName,
             ]);
             Alert::success(trans('message.success'), trans('messsage.successfully'));
@@ -68,6 +77,9 @@ class AuthorController extends Controller
 
     public function requestAuthor(Request $request)
     {
+        if (!Gate::denies('become_author')) {
+            abort(Response::HTTP_FORBIDDEN);
+        }
         $authorRequest = RequestWriter::create([
             'note' => $request->note,
             'status' => config('number_status_post.status_request'),

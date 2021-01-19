@@ -27,11 +27,16 @@ class ClientController extends Controller
 
     public function filterCategory($id)
     {
+        $category = Category::findOrFail($id)->load([
+            'posts' => function ($query) {
+                $query->orderBy('created_at', 'desc')->first();
+            }
+        ]);
         $posts = Post::where('category_id', $id)->with('category')->latest()->get();
         $allCategory = Category::where('parent_id', config('number_format.parent_id'))->get();
         $allCategory->load('children');
 
-        return view('website.frontend.filter_category', compact('posts', 'allCategory'));
+        return view('website.frontend.filter_category', compact('posts', 'allCategory', 'category'));
     }
 
     public function postLike(Request $request)

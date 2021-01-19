@@ -14,20 +14,23 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 Route::group(['middleware' => ['localization']], function () {
-    Route::resource('dashboard', 'AdminController')->only('index');
-    Route::resource('categories', 'CategoryController');
-    Route::resource('posts', 'PostController');
-    Route::get('/postRequest', 'AdminController@showRequestPost')->name('postRequest');
+    Route::group(['middleware' => ['admin']], function () {
+        Route::resource('dashboard', 'AdminController')->only('index');
+        Route::resource('categories', 'CategoryController');
+        Route::get('/postRequest', 'AdminController@showRequestPost')->name('postRequest');
+        Route::resource('users', 'UserController');
+        Route::resource('comments', 'CommentController');
+    });
     Route::resource('home', 'ClientController');
-    Route::resource('users', 'UserController');
+    Route::resource('posts', 'PostController');
     Route::resource('authors', 'AuthorController');
     Route::get('/filter/{id}', 'ClientController@filterCategory')->name('filterCategory');
     Route::get('/search', 'PostController@search')->name('search');
     Route::post('/like', 'ClientController@postLike')->name('like');
     Route::post('/dislike', 'ClientController@postDisLike')->name('dislike');
     Route::resource('comments', 'CommentController');
-    Route::post('/requestAuthor', 'AuthorController@requestAuthor')->name('requestAuthor');
     Route::resource('requests', 'RequestAuthorController');
+    Route::post('/requestAuthor', 'AuthorController@requestAuthor')->name('requestAuthor');
 });
 Route::get('change-languages/{language}', 'LangController@changeLanguage')->name('change-languages');
 Auth::routes();

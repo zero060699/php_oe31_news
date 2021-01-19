@@ -7,6 +7,6 @@ return [
     'paginate_home' => 7,
     'view' => 1,
     'user' => 3,
-    'author' => 2,
     'admin' => 1,
+    'author' => 2,
 ];

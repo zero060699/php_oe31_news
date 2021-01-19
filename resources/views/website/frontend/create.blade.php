@@ -58,9 +58,13 @@
                                             </div>
                                         </div>
                                     </li>
-                                    <li>
-                                        <a href="{{ route('authors.create') }}">{{ trans('message.create_post') }}</a>
-                                    </li>
+                                    @auth
+                                        @can('create_post')
+                                            <li>
+                                                <a href="{{ route('authors.create') }}">{{ trans('message.create_post') }}</a>
+                                            </li>
+                                        @endcan
+                                    @endauth
                                     @guest
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('login') }}">{{ trans('message.login') }}</a>
@@ -122,7 +126,7 @@
         </div>
     </header>
     <div class="col-md-12 col-sm-12 alo-alo">
-        <div class="x_panel">
+        <div class="x_panel create_post">
             <div class="x_title">
                 <h2>{{ trans('message.create_post') }}</h2>
                 <div class="clearfix"></div>
