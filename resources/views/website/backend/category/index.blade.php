@@ -16,16 +16,6 @@
                             <div id="datatable-responsive_wrapper"
                                 class="dataTables_wrapper container-fluid dt-bootstrap no-footer">
                                 <div class="row">
-                                    <div class="col-sm-6">
-                                        <div id="datatable-responsive_filter" class="dataTables_filter">
-                                            <label>{{ trans('message.search') }}
-                                                <input type="search" class="form-control input-sm" placeholder=""
-                                                    aria-controls="datatable-responsive">
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-sm-12">
                                         <table id="datatable-responsive"
                                             class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline"

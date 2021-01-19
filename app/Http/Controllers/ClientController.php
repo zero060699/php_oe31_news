@@ -20,7 +20,7 @@ class ClientController extends Controller
     {
         $category = Category::where('parent_id', config('number_format.parent_id'))->get();
         $category->load('children');
-        $posts = Post::where('status', config('number_status_post.status'))->latest()->paginate(config('number_status_post.paginate_post'));
+        $posts = Post::where('status', config('number_status_post.status'))->latest()->paginate(config('number_status_post.paginate_home'));
 
         return view('website.frontend.index', compact('posts', 'category'));
     }
