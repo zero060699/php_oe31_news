@@ -25,7 +25,9 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        //
+        $authors= Post::all();
+
+        return view('website.frontend.authors')->with('authors', $authors);
     }
 
     /**
@@ -42,6 +44,22 @@ class AuthorController extends Controller
         $category->load('children');
 
         return view('website.frontend.create', compact('category'));
+    }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    public function postAuthor($id)
+    {
+        $users = User::findOrFail($id)->load('posts');
+
+        return view ('website.frontend.authors', compact('users'));
     }
 
     /**
@@ -98,7 +116,11 @@ class AuthorController extends Controller
      */
     public function edit($id)
     {
-        //
+        $authors = Post::findOrFail($id);
+        $category = Category::all();
+        $category->load('children');
+
+        return view('website.frontend.edit', compact('authors', 'category'));
     }
 
     /**
@@ -110,7 +132,29 @@ class AuthorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $authors = Post::findOrFail($id);
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $fileName = time() . '.' . $extension;
+            $file->move(public_path(config('image_user.image')), $fileName);
+            $authors->update([
+                'title' => $request->title,
+                'content' => $request->content,
+                'category_id' => $request->category_id,
+                'view' => config('number_status_post.view'),
+                'user_id' => Auth::id(),
+                'image'=> $fileName,
+                'status' => config('number_status_post.view'),
+            ]);
+            Alert::success(trans('message.success'), trans('messsage.successfully'));
+
+            return redirect()->route('home.index');
+        } else {
+            Alert::danger(trans('message.success'), trans('messsage.add_successfully'));
+        }
+
+        return redirect()->route('authors.edit', $id);
     }
 
     /**
@@ -121,6 +165,8 @@ class AuthorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $author = Post::destroy($id);
+
+        return redirect()->back();
     }
 }
