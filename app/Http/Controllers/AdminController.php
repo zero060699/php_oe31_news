@@ -24,7 +24,7 @@ class AdminController extends Controller
 
     public function showRequestPost()
     {
-        $posts = Post::where('status', config('number_status_post.status_request'))->latest()->get();
+        $posts = Post::where('status', config('number_status_post.status_request'))->latest()->paginate(config('number_status_post.paginate_home'));
 
         return view('website.backend.post.pending_request', compact('posts'));
     }

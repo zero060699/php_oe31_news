@@ -25,7 +25,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('author')->where('status', config('number_status_post.status'))->latest()->get();
+        $posts = Post::with('author')->where('status', config('number_status_post.status'))->latest()->paginate(config('number_status_post.paginate_home'));
 
         return view('website.backend.post.index', compact('posts'));
     }
@@ -79,7 +79,7 @@ class PostController extends Controller
         $search = $request->search;
         $category = Category::where('parent_id', config('number_format.parent_id'))->get();
         $category->load('children');
-        $posts = Post::where('title', 'LIKE', '%' .$search. '%')->with('category')->get();
+        $posts = Post::where('title', 'LIKE', '%' .$search. '%')->with('category')->paginate(config('number_status_post.paginate_home'));
 
         return view('website.frontend.search', compact('posts', 'category', 'search'));
     }

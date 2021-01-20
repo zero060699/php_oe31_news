@@ -17,9 +17,9 @@ class RequestAuthorController extends Controller
      */
     public function index()
     {
-        $requestWriter = RequestWriter::with('roles')
+        $requestWriter = RequestWriter::with('role')
             ->where('role_id', config('number_status_post.user'))
-            ->where('status', config('number_status_post.status_request'))->latest()->get();
+            ->where('status', config('number_status_post.status_request'))->latest()->paginate(config('number_status_post.paginate_home'));
 
         return view('website.backend.author_request.pending_request', compact('requestWriter'));
     }
