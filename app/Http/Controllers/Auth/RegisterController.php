@@ -71,14 +71,14 @@ class RegisterController extends Controller
             $file = $request->file('image');
             $extension = $file->getClientOriginalName();
             $filename = time() . '_' . $extension;
-            $file->move(public_path(config('image.image')), $filename);
+            $file->move(public_path(config('image_user.image')), $filename);
             $users->image = $filename;
         }
             return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'role_id' => config('default.default_value.role_id'),
+            'role_id' => config('number_status_post.user'),
             'image' => $filename,
             'status' => config('default.default_value.status'),
         ]);

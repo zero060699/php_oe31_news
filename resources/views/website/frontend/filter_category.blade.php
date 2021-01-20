@@ -45,7 +45,7 @@
                 <!--lastest post-->
                 <div class="sidebar-widget mb-50">
                     <div class="widget-header mb-30">
-                        <h5 class="widget-title">Top <span>Trending</span></h5>
+                        <h5 class="widget-title">Top <span> Trending</span></h5>
                     </div>
                     <div class="post-aside-style-2">
                         <ul class="list-post">
@@ -242,22 +242,38 @@
                                                 </li>
                                             @endif
                                         @else
-                                            <li class="nav-item dropdown">
-                                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#"
-                                                    role="button" data-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false" v-pre>
-                                                    {{ Auth::user()->name }}
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right"
-                                                    aria-labelledby="navbarDropdown">
-                                                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                                                        @csrf
-                                                        <button class="btn btn-light"
-                                                            type="submit">{{ trans('message.logout') }}</button>
-                                                    </form>
-                                                </div>
-                                            </li>
+                                        <li class="nav-item dropdown">
+                                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                                {{ Auth::user()->name }}
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                                    @csrf
+                                                    <button class="btn btn-light"
+                                                        type="submit">{{ trans('message.logout') }}</button>
+                                                </form>
+                                                @can('my_post')
+                                                    <a href="{{ route('postAuthor', [Auth::user()->id]) }}" class="btn btn-primary">{{ trans('message.my_post') }}</a>
+                                                @endcan
+                                                @cannot('become_author')
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#author">
+                                                        {{ trans('message.become_author') }}
+                                                    </button>
+                                                @endcannot
+                                            </div>
+                                        </li>
                                         @endguest
+                                        <li class="nav-item dropdown">
+                                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                                {{ trans('message.language') }}
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                                <a href="{{ route('change-languages', ['language' => 'en']) }}">{{ trans('message.en') }}</a>
+                                                <a href="{{ route('change-languages', ['language' => 'vi']) }}">{{ trans('message.vi') }}</a>
+                                            </div>
+                                        </li>
                                     </ul>
 
                                     {{-- Notification --}}
@@ -424,6 +440,7 @@
                                                     </div>
                                                 </article>
                                             @endforeach
+                                            {{ $posts->links() }}
                                         </div>
                                     </div>
                                 </div>

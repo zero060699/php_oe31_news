@@ -41,5 +41,11 @@ class AuthServiceProvider extends ServiceProvider
                 return true;
             }
         });
+
+        Gate::allows('my_post', function ($user) {
+            if ($user->role_id === config('number_status_post.author')) {
+                return true;
+            }
+        });
     }
 }

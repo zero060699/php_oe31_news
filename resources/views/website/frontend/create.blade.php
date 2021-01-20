@@ -30,7 +30,7 @@
                             <nav>
                                 <ul class="main-menu d-none d-lg-inline">
                                     <li class="menu-item-has-children">
-                                        <a href="index.html">
+                                        <a href="{{ route('home.index') }}">
                                             <span class="mr-15">
                                                 <ion-icon name="home-outline"></ion-icon>
                                             </span>{{ trans('message.home') }}
@@ -75,7 +75,7 @@
                                                     href="{{ route('register') }}">{{ trans('message.register') }}</a>
                                             </li>
                                         @endif
-                                    @else
+                                        @else
                                         <li class="nav-item dropdown">
                                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -87,9 +87,27 @@
                                                     <button class="btn btn-light"
                                                         type="submit">{{ trans('message.logout') }}</button>
                                                 </form>
+                                                @can('my_post')
+                                                    <a href="{{ route('postAuthor', [Auth::user()->id]) }}" class="btn btn-primary">{{ trans('message.my_post') }}</a>
+                                                @endcan
+                                                @cannot('become_author')
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#author">
+                                                        {{ trans('message.become_author') }}
+                                                    </button>
+                                                @endcannot
                                             </div>
                                         </li>
                                     @endguest
+                                    <li class="nav-item dropdown">
+                                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                            {{ trans('message.language') }}
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                            <a href="{{ route('change-languages', ['language' => 'en']) }}">{{ trans('message.en') }}</a>
+                                            <a href="{{ route('change-languages', ['language' => 'vi']) }}">{{ trans('message.vi') }}</a>
+                                        </div>
+                                    </li>
                                 </ul>
                                 <div class="d-inline ml-50 tools-icon">
                                     <a class="red-tooltip text-danger" href="#" data-toggle="tooltip" data-placement="top"

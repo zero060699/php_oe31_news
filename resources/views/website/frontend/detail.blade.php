@@ -84,7 +84,7 @@
                                                     <ul class="col-md-2">
                                                         <li><strong>{{ $item->name }}</strong></li>
                                                         @foreach ($item->children as $child)
-                                                            <li><a href="category.html">{{ $child->name }}</a></li>
+                                                            <li><a href="{{ route('filterCategory', [$child->id]) }}">{{ $child->name }}</a></li>
                                                         @endforeach
                                                     </ul>
                                                 @endforeach
@@ -122,19 +122,25 @@
                                                             <button class="btn btn-light"
                                                                 type="submit">{{ trans('message.logout') }}</button>
                                                         </form>
+                                                        @can('my_post')
+                                                        <a href="{{ route('postAuthor', [Auth::user()->id]) }}" class="btn btn-primary">{{ trans('message.my_post') }}</a>
+                                                        @endcan
+                                                        @cannot('become_author')
+                                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#author">
+                                                                {{ trans('message.become_author') }}
+                                                            </button>
+                                                        @endcannot
                                                     </div>
                                                 </li>
                                         @endguest
                                         <li class="nav-item dropdown">
-                                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#"
-                                                role="button" data-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false" v-pre>
+                                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                                 {{ trans('message.language') }}
                                             </a>
-                                            <div class="dropdown-menu dropdown-menu-right"
-                                                aria-labelledby="navbarDropdown">
-                                                <a href="{{ route('change-languages', ['language' => 'en']) }}" class="btn btn-primary">{{ trans('message.en') }}</a>
-                                                <a href="{{ route('change-languages', ['language' => 'vi']) }}" class="btn btn-primary">{{ trans('message.vi') }}</a>
+                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                                <a href="{{ route('change-languages', ['language' => 'en']) }}">{{ trans('message.en') }}</a>
+                                                <a href="{{ route('change-languages', ['language' => 'vi']) }}">{{ trans('message.vi') }}</a>
                                             </div>
                                         </li>
                                     </ul>
@@ -161,21 +167,21 @@
         <main class="position-relative">
             <div class="container">
                 <div class="entry-header entry-header-1 mb-30 mt-50" data-postid="{{ $post->id }}">
-                    <div class="entry-meta meta-0 font-small mb-30"><a href="category.html"><span
+                    <div class="entry-meta meta-0 font-small mb-30"><a href="{{ route('filterCategory', [$post->category->id]) }}"><span
                                 class="post-cat bg-success color-white">{{ $post->category->name }}</span></a></div>
                     <h1 class="post-title mb-30 title-detail">
                         {{ $post->title }}
                     </h1>
                     <div class="entry-meta meta-1 font-x-small color-grey text-uppercase">
-                        <span class="post-by">{{ trans('message.by') }}<a
+                        <span class="post-by">{{ trans('message.by') }} <a
                                 href="author.html">{{ $post->author->name }}</a></span>
                         <span class="post-on">{{ date('M d ,Y', strtotime($post->created_at)) }} {{ trans('message.at') }} {{ date('g:ia', strtotime($post->created_at)) }}</span>
                         <div class="font-x-small mt-10 icon-like">
                             <div class="hit-count">
-                                <i class="far fa-eye"></i>{{ $post->view . trans('message.view') }}
+                                <i class="far fa-eye"></i> {{ $post->view . " " . trans('message.view') }}
                             </div>
                             <div class="hit-count">
-                                <i class="ti-comment mr-5"></i>{{ $post->comments->count() . trans('message.comment') }}
+                                <i class="ti-comment mr-5"></i>{{ $post->comments->count() . " " . trans('message.comment') }}
                             </div>
                             <div class="hit-count">
                                 <i class="far fa-thumbs-up"></i>{{ $post->likes->where('like', config('number_format.view'))->count() . " " . trans('message.like') }}
@@ -184,11 +190,8 @@
                         </div>
                         @auth
                             <div class="interaction">
-                                <button data-post="{{ $post->id }}" class="like"><i class="far fa-thumbs-up"></i>
+                                <button data-post="{{ $post->id }}" class="btn btn-primary like"><i class="far fa-thumbs-up"></i>
                                     {{ trans('message.like') }}
-                                </button> |
-                                <button data-post="{{ $post->id }}" class="dislike"><i class="far fa-thumbs-down"></i>
-                                    {{ trans('message.dislike') }}
                                 </button>
                             </div>
                         @endauth
@@ -237,10 +240,9 @@
                         </div>
                         <!--Comments-->
                         <div class="comments-area">
-                        <h3 class="mb-30">{{ $post->comments->count() . trans('message.comment') }}</h3>
+                        <h3 class="mb-30" id="count-comment">{{ $post->comments->count() . " " . trans('message.comment') }}</h3>
                             <div class="comment-list">
                                 @foreach ($post->comments as $comment)
-
                                     <div class="single-comment justify-content-between d-flex" id="listcomment">
                                         <div class="user justify-content-between d-flex">
                                             <div class="thumb">
@@ -273,7 +275,7 @@
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <textarea class="form-control w-100" name="content" id="content"
-                                                        cols="30" rows="9"
+                                                        cols="10" rows="10"
                                                         placeholder="{{ trans('message.write_comment') }}">
                                                     </textarea>
                                                 </div>

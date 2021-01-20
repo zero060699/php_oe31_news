@@ -65,10 +65,13 @@
                                                     </th>
                                                 </tr>
                                             </thead>
+                                            @php
+                                                $index = 1;
+                                            @endphp
                                             <tbody>
                                                 @foreach ($posts as $post)
                                                     <tr role="row" class="odd">
-                                                        <td>{{ $post->id }}</td>
+                                                        <td>{{ $index++ }}</td>
                                                         <td>{{ $post->title }}</td>
                                                         <td>{{ $post->author->name }}</td>
                                                         <td>{{ $post->view }}</td>
@@ -87,6 +90,7 @@
                                                         </td>
                                                     </tr>
                                                 @endforeach
+                                                {{ $posts->links() }}
                                             </tbody>
                                         </table>
                                     </div>
