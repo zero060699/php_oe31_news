@@ -32,7 +32,7 @@ class ClientController extends Controller
                 $query->orderBy('created_at', 'desc')->first();
             }
         ]);
-        $posts = Post::where('category_id', $id)->with('category')->latest()->get();
+        $posts = Post::where('category_id', $id)->with('category')->latest()->paginate(config('number_status_post.paginate_home'));
         $allCategory = Category::where('parent_id', config('number_format.parent_id'))->get();
         $allCategory->load('children');
 

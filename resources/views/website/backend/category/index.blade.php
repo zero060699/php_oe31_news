@@ -55,6 +55,7 @@
                                                         </td>
                                                     </tr>
                                                 @endforeach
+                                                {{ $items->links() }}
                                             </tbody>
                                         </table>
                                     </div>

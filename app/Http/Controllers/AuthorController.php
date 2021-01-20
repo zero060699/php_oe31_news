@@ -57,9 +57,16 @@ class AuthorController extends Controller
 
     public function postAuthor($id)
     {
-        $users = User::findOrFail($id)->load('posts');
+        if (!Gate::allows('my_post')) {
+            abort(Response::HTTP_FORBIDDEN);
+        }
+        $users = User::findOrFail($id)->load(['posts' => function ($query) {
+            $query->where('status', config('number_status_post.status_request'));
+        }]);
+        $category = Category::where('parent_id', config('number_format.parent_id'))->get();
+        $category->load('children');
 
-        return view ('website.frontend.authors', compact('users'));
+        return view ('website.frontend.authors', compact('users', 'category'));
     }
 
     /**
@@ -82,12 +89,11 @@ class AuthorController extends Controller
                 'view' => config('number_status_post.view'),
                 'user_id' => Auth::id(),
                 'image'=> $fileName,
+                'status' => config('number_status_post.status_request'),
             ]);
             Alert::success(trans('message.success'), trans('messsage.successfully'));
 
             return redirect()->route('home.index');
-        } else {
-            Alert::danger(trans('message.success'), trans('messsage.add_successfully'));
         }
 
         return redirect()->route('home.index');

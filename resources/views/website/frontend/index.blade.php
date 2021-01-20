@@ -99,7 +99,7 @@
                     <div class="row">
                         <div class="col-lg-2 col-md-3">
                             <div class="header-logo d-none d-lg-block">
-                                <a href="index.html">
+                                <a href="{{ route('home.index') }}">
                                     <img class="logo-img d-inline" src="assets/imgs/logo.svg" alt="">
                                 </a>
                             </div>
@@ -172,7 +172,9 @@
                                                         <button class="btn btn-light"
                                                             type="submit">{{ trans('message.logout') }}</button>
                                                     </form>
-                                                    <a href="{{ route('postAuthor', [Auth::user()->id]) }}">{{ trans('message.my_post') }}</a>
+                                                    @can('my_post')
+                                                        <a href="{{ route('postAuthor', [Auth::user()->id]) }}" class="btn btn-primary">{{ trans('message.my_post') }}</a>
+                                                    @endcan
                                                     @cannot('become_author')
                                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#author">
                                                             {{ trans('message.become_author') }}
@@ -182,18 +184,15 @@
                                             </li>
                                         @endguest
                                         <li class="nav-item dropdown">
-                                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#"
-                                                role="button" data-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false" v-pre>
+                                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                                 {{ trans('message.language') }}
                                             </a>
-                                            <div class="dropdown-menu dropdown-menu-right"
-                                                aria-labelledby="navbarDropdown">
-                                                <a href="{{ route('change-languages', ['language' => 'en']) }}" class="btn btn-primary">{{ trans('message.en') }}</a>
-                                                <a href="{{ route('change-languages', ['language' => 'vi']) }}" class="btn btn-primary">{{ trans('message.vi') }}</a>
+                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                                <a href="{{ route('change-languages', ['language' => 'en']) }}">{{ trans('message.en') }}</a>
+                                                <a href="{{ route('change-languages', ['language' => 'vi']) }}">{{ trans('message.vi') }}</a>
                                             </div>
                                         </li>
-
                                     {{-- Notification --}}
                                 </nav>
                             </div>
@@ -256,7 +255,7 @@
                                 <!-- Featured posts -->
                                 <div class="featured-post mb-50">
                                     <h4 class="widget-title mb-30">
-                                        {{ trans('message.breaking') }}<span>{{ trans('message.news') }}</span></h4>
+                                        {{ trans('message.breaking') }}<span> {{ trans('message.news') }}</span></h4>
                                     <div class="featured-slider-1 border-radius-10">
                                         <div class="featured-slider-1-items">
                                             <div class="slider-single p-10">
@@ -359,7 +358,7 @@
                                 <div class="sidebar-widget">
                                     <div class="widget-header mb-30">
                                         <h5 class="widget-title">
-                                            {{ trans('message.top') }}<span>{{ trans('message.trending') }}</span></h5>
+                                            {{ trans('message.top') }}<span> {{ trans('message.trending') }}</span></h5>
                                     </div>
                                     <div class="post-aside-style-2">
                                         <ul class="list-post">
@@ -375,7 +374,7 @@
                                                                 href="single.html">{{ trans('message.title') }}</a></h6>
                                                         <div
                                                             class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                            <span class="post-by">{{ trans('message.by') }}<a
+                                                            <span class="post-by">{{ trans('message.by') }} <a
                                                                     href="author.html">{{ trans('message.author') }}</a></span>
                                                         </div>
                                                     </div>
@@ -393,7 +392,7 @@
                                                                 href="single.html">{{ trans('message.title') }}</a></h6>
                                                         <div
                                                             class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                            <span class="post-by">{{ trans('message.by') }}<a
+                                                            <span class="post-by">{{ trans('message.by') }} <a
                                                                     href="author.html">{{ trans('message.author') }}</a></span>
                                                         </div>
                                                     </div>
@@ -411,7 +410,7 @@
                                                                 href="single.html">{{ trans('message.title') }}</a></h6>
                                                         <div
                                                             class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                            <span class="post-by">{{ trans('message.by') }}<a
+                                                            <span class="post-by">{{ trans('message.by') }} <a
                                                                     href="author.html">{{ trans('message.author') }}</a></span>
                                                         </div>
                                                     </div>
@@ -430,7 +429,7 @@
                                         <div class="row">
                                             <div class="col-7">
                                                 <h4 class="widget-title mb-0">
-                                                    {{ trans('message.latest') }}<span>{{ trans('message.post') }}</span>
+                                                    {{ trans('message.latest') }}<span> {{ trans('message.post') }}</span>
                                                 </h4>
                                             </div>
                                         </div>
@@ -466,7 +465,7 @@
                                                 <div class="mb-20 overflow-hidden">
                                                     <div
                                                         class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                        <span class="post-by">{{ trans('message.by') }}<a
+                                                        <span class="post-by">{{ trans('message.by') }} <a
                                                                 href="author.html">{{ trans('message.author') }}</a></span>
                                                         <span class="post-on">{{ trans('message.created_at') }}</span>
                                                     </div>
@@ -495,7 +494,7 @@
                                                         </h5>
                                                         <div
                                                             class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                            <span class="post-by">{{ trans('message.by') }}<a
+                                                            <span class="post-by">{{ trans('message.by') }} <a
                                                                     href="author.html">{{ $post->author->name }}</a></span>
                                                             <span class="post-on">{{  date('M d ,Y', strtotime($post->created_at)) }} {{ trans('message.at') }} {{  date('g:ia', strtotime($post->created_at)) }}</span>
                                                         </div>
@@ -511,7 +510,7 @@
                                 <div class="sidebar-widget mb-50">
                                     <div class="widget-header mb-30">
                                         <h5 class="widget-title">
-                                            {{ trans('message.most') }}<span>{{ trans('message.popular') }}</span></h5>
+                                            {{ trans('message.most') }}<span> {{ trans('message.popular') }}</span></h5>
                                     </div>
                                     <div class="post-aside-style-3">
                                         <article class="bg-white border-radius-15 mb-30 p-10 wow fadeIn animated">
@@ -527,7 +526,7 @@
                                                     class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
                                                     <span class="post-in"><a
                                                             href="category.html">{{ trans('message.category') }}</a></span>
-                                                    <span class="post-by">{{ trans('message.by') }}<a
+                                                    <span class="post-by">{{ trans('message.by') }} <a
                                                             href="author.html">{{ trans('message.author') }}</a></span>
                                                 </div>
                                             </div>
@@ -545,7 +544,7 @@
                                                     class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
                                                     <span class="post-in"><a
                                                             href="category.html">{{ trans('message.category') }}</a></span>
-                                                    <span class="post-by">{{ trans('message.by') }}<a
+                                                    <span class="post-by">{{ trans('message.by') }} <a
                                                             href="author.html">{{ trans('message.author') }}</a></span>
                                                 </div>
                                             </div>
@@ -563,7 +562,7 @@
                                                     class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
                                                     <span class="post-in"><a
                                                             href="category.html">{{ trans('message.category') }}</a></span>
-                                                    <span class="post-by">{{ trans('message.by') }}<a
+                                                    <span class="post-by">{{ trans('message.by') }} <a
                                                             href="author.html">{{ trans('message.author') }}</a></span>
                                                 </div>
                                             </div>
@@ -576,7 +575,7 @@
                             <div class="col-md-12">
                                 <div class="widget-header position-relative mb-30">
                                     <h4 class="widget-title mb-0">
-                                        {{ trans('message.all') }}<span>{{ trans('message.post') }}</span></h4>
+                                        {{ trans('message.all') }}<span> {{ trans('message.post') }}</span></h4>
                                 </div>
                                 <div class="post-carausel-2 post-module-1 row">
                                     <div class="col">
@@ -594,7 +593,7 @@
                                                         class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
                                                         <span class="post-in"><a
                                                                 href="category.html">{{ trans('message.category') }}</a></span>
-                                                        <span class="post-by">{{ trans('message.by') }}<a
+                                                        <span class="post-by">{{ trans('message.by') }} <a
                                                                 href="author.html">{{ trans('message.author') }}</a></span>
                                                     </div>
                                                 </div>
@@ -616,7 +615,7 @@
                                                         class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
                                                         <span class="post-in"><a
                                                                 href="category.html">{{ trans('message.category') }}</a></span>
-                                                        <span class="post-by">{{ trans('message.by') }}<a
+                                                        <span class="post-by">{{ trans('message.by') }} <a
                                                                 href="author.html">{{ trans('message.author') }}</a></span>
                                                     </div>
                                                 </div>
@@ -638,7 +637,7 @@
                                                         class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
                                                         <span class="post-in"><a
                                                                 href="category.html">{{ trans('message.category') }}</a></span>
-                                                        <span class="post-by">{{ trans('message.by') }}<a
+                                                        <span class="post-by">{{ trans('message.by') }} <a
                                                                 href="author.html">{{ trans('message.author') }}</a></span>
                                                     </div>
                                                 </div>
@@ -660,7 +659,7 @@
                                                         class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
                                                         <span class="post-in"><a
                                                                 href="category.html">{{ trans('message.category') }}</a></span>
-                                                        <span class="post-by">{{ trans('message.by') }}<a
+                                                        <span class="post-by">{{ trans('message.by') }} <a
                                                                 href="author.html">{{ trans('message.author') }}</a></span>
                                                     </div>
                                                 </div>
@@ -682,7 +681,7 @@
                                                         class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
                                                         <span class="post-in"><a
                                                                 href="category.html">{{ trans('message.category') }}</a></span>
-                                                        <span class="post-by">{{ trans('message.by') }}<a
+                                                        <span class="post-by">{{ trans('message.by') }} <a
                                                                 href="author.html">{{ trans('message.author') }}</a></span>
                                                     </div>
                                                 </div>

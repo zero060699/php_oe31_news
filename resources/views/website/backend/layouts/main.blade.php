@@ -73,6 +73,17 @@
                                 </li>
                             @endguest
                             </li>
+                            <li class="nav-item dropdown language-menu">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ trans('message.language') }}
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right language-li" aria-labelledby="navbarDropdown">
+                                    <a href="{{ route('change-languages', ['language' => 'en']) }}" class="btn btn-primary">{{ trans('message.en') }}</a>
+                                    <br>
+                                    <a href="{{ route('change-languages', ['language' => 'vi']) }}" class="btn btn-primary">{{ trans('message.vi') }}</a>
+                                </div>
+                            </li>
                         </ul>
                     </nav>
                 </div>

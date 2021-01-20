@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
-
 <!-- Mirrored from demos.alithemes.com/html/newsviral/author.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 25 Oct 2020 07:34:20 GMT -->
 <head>
     <meta charset="utf-8">
@@ -188,375 +186,96 @@
                         <div class="col-lg-10 col-md-9 main-header-navigation">
                             <!-- Main-menu -->
                             <div class="main-nav text-left float-lg-left float-md-right">
-                                <ul class="mobi-menu d-none menu-3-columns" id="navigation">
-                                    <li class="cat-item cat-item-2"><a href="#">Global Economy</a></li>
-                                    <li class="cat-item cat-item-3"><a href="#">Environment</a></li>
-                                    <li class="cat-item cat-item-4"><a href="#">Religion</a></li>
-                                    <li class="cat-item cat-item-5"><a href="#">Fashion</a></li>
-                                    <li class="cat-item cat-item-6"><a href="#">Terrorism</a></li>
-                                    <li class="cat-item cat-item-7"><a href="#">Conflicts</a></li>
-                                    <li class="cat-item cat-item-2"><a href="#">Scandals</a></li>
-                                    <li class="cat-item cat-item-2"><a href="#">Executive</a></li>
-                                    <li class="cat-item cat-item-2"><a href="#">Foreign policy</a></li>
-                                    <li class="cat-item cat-item-2"><a href="#">Healthy Living</a></li>
-                                    <li class="cat-item cat-item-3"><a href="#">Medical Research</a></li>
-                                    <li class="cat-item cat-item-4"><a href="#">Children’s Health</a></li>
-                                    <li class="cat-item cat-item-5"><a href="#">Around the World</a></li>
-                                    <li class="cat-item cat-item-6"><a href="#">Ad Choices</a></li>
-                                    <li class="cat-item cat-item-7"><a href="#">Mental Health</a></li>
-                                    <li class="cat-item cat-item-2"><a href="#">Media Relations</a></li>
-                                </ul>
                                 <nav>
                                     <ul class="main-menu d-none d-lg-inline">
                                         <li class="menu-item-has-children">
-                                            <a href="index.html"><span class="mr-15">
+                                            <a href="{{ route('home.index') }}">
+                                                <span class="mr-15">
                                                     <ion-icon name="home-outline"></ion-icon>
-                                                </span>Home</a>
-                                            <ul class="sub-menu text-muted font-small">
-                                                <li><a href="index.html">Home default</a></li>
-                                                <li><a href="home-2.html">Homepage 2</a></li>
-                                                <li><a href="home-3.html">Homepage 3</a></li>
-                                            </ul>
+                                                </span>{{ trans('message.home') }}
+                                            </a>
                                         </li>
                                         <li class="mega-menu-item">
                                             <a href="#">
                                                 <span class="mr-15">
                                                     <ion-icon name="desktop-outline"></ion-icon>
-                                                </span>Layouts
+                                                </span>{{ trans('message.category') }}
                                             </a>
                                             <div class="sub-mega-menu sub-menu-list row text-muted font-small">
-                                                <ul class="col-md-2">
-                                                    <li><strong>Archive layout</strong></li>
-                                                    <li><a href="category.html">Category list</a></li>
-                                                    <li><a href="category-grid.html">Category grid</a></li>
-                                                    <li><a href="category-big.html">Category big</a></li>
-                                                    <li><a href="category-metro.html">Category metro</a></li>
-                                                </ul>
-                                                <ul class="col-md-2">
-                                                    <li><strong>Post format</strong></li>
-                                                    <li><a href="single.html">Post standard</a></li>
-                                                    <li><a href="single-video.html">Post video</a></li>
-                                                    <li><a href="single-gallery.html">Post gallery</a></li>
-                                                    <li><a href="single-audio.html">Post audio</a></li>
-                                                    <li><a href="single-image.html">Post image</a></li>
-                                                    <li><a href="single-full.html">Post full width</a></li>
-                                                </ul>
-                                                <ul class="col-md-2">
-                                                    <li><strong>Pages</strong></li>
-                                                    <li><a href="typography.html">Typography</a></li>
-                                                    <li><a href="about.html">About us</a></li>
-                                                    <li><a href="contact.html">Contact us</a></li>
-                                                    <li><a href="search.html">Search</a></li>
-                                                    <li><a href="author.html">Author</a></li>
-                                                    <li><a href="404.html">404 page</a></li>
-                                                </ul>
-                                                <div class="col-md-6 text-right">
-                                                    <a href="#"><img class="border-radius-10" src="assets/imgs/ads-2.jpg" alt=""></a>
-                                                </div>
+                                                @foreach ($category as $item)
+                                                    <ul class="col-md-2">
+                                                        <li><a href="{{ route('filterCategory', [$item->id]) }}"><strong>{{ $item->name }}</strong></a></li>
+                                                        @foreach ($item->children as $child)
+                                                            <li><a href="{{ route('filterCategory', [$item->id]) }}">{{ $child->name }}</a></li>
+                                                        @endforeach
+                                                    </ul>
+                                                @endforeach
                                             </div>
                                         </li>
-                                        <li class="mega-menu-item">
-                                            <a href="category.html"><span class="mr-15">
-                                                    <ion-icon name="megaphone-outline"></ion-icon>
-                                                </span>Mega</a>
-                                            <div class="sub-mega-menu">
-                                                <div class="nav flex-column nav-pills" role="tablist">
-                                                    <a class="nav-link active" data-toggle="pill" href="#news-0" role="tab">All</a>
-                                                    <a class="nav-link" data-toggle="pill" href="#news-1" role="tab">Entertaiment</a>
-                                                    <a class="nav-link" data-toggle="pill" href="#news-2" role="tab">Fashion</a>
-                                                    <a class="nav-link" data-toggle="pill" href="#news-3" role="tab">Life Style</a>
+                                        @auth
+                                            @can('create_post')
+                                                <li>
+                                                    <a href="{{ route('authors.create') }}">{{ trans('message.create_post') }}</a>
+                                                </li>
+                                            @endcan
+                                        @endauth
+                                        @guest
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="{{ route('login') }}">{{ trans('message.login') }}</a>
+                                            </li>
+                                            @if (Route::has('register'))
+                                                <li class="nav-item">
+                                                    <a class="nav-link"
+                                                        href="{{ route('register') }}">{{ trans('message.register') }}</a>
+                                                </li>
+                                            @endif
+                                            @else
+                                            <li class="nav-item dropdown">
+                                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                                    {{ Auth::user()->name }}
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                                        @csrf
+                                                        <button class="btn btn-light"
+                                                            type="submit">{{ trans('message.logout') }}</button>
+                                                    </form>
+                                                    @can('my_post')
+                                                        <a href="{{ route('postAuthor', [Auth::user()->id]) }}">{{ trans('message.my_post') }}</a>
+                                                    @endcan
+                                                    @cannot('become_author')
+                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#author">
+                                                            {{ trans('message.become_author') }}
+                                                        </button>
+                                                    @endcannot
                                                 </div>
-                                                <div class="tab-content">
-                                                    <div class="tab-pane show active" id="news-0" role="tabpanel">
-                                                        <div class="row">
-                                                            <div class="col-3 post-module-1">
-                                                                <div class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
-                                                                    <a href="single.html">
-                                                                        <img src="assets/imgs/news-1.jpg" alt="">
-                                                                    </a>
-                                                                    <span class="top-right-icon background2">
-                                                                        <i class="mdi mdi-audiotrack"></i>
-                                                                    </span>
-                                                                </div>
-                                                                <div class="post-content media-body">
-                                                                    <h6 class="post-title mb-10 text-limit-2-row">The litigants on the screen are not actors </h6>
-                                                                    <div class="entry-meta meta-1 font-x-small color-grey">
-                                                                        <span class="post-on">25 April</span>
-                                                                        <span class="hit-count has-dot">126k Views</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-3 post-module-1">
-                                                                <div class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
-                                                                    <a href="single.html">
-                                                                        <img src="assets/imgs/news-2.jpg" alt="">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="post-content media-body">
-                                                                    <h6 class="post-title mb-10 text-limit-2-row">Not a bit of hesitation, you better think twice</h6>
-                                                                    <div class="entry-meta meta-1 font-x-small color-grey mt-10">
-                                                                        <span class="post-on">25 April</span>
-                                                                        <span class="hit-count has-dot">126k Views</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-3 post-module-1">
-                                                                <div class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
-                                                                    <a href="single.html">
-                                                                        <img src="assets/imgs/news-3.jpg" alt="">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="post-content media-body">
-                                                                    <h6 class="post-title mb-10 text-limit-2-row">We got a right to pick a little fight, Bonanza </h6>
-                                                                    <div class="entry-meta meta-1 font-x-small color-grey mt-10">
-                                                                        <span class="post-on">25 April</span>
-                                                                        <span class="hit-count has-dot">126k Views</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-3 post-module-1">
-                                                                <div class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
-                                                                    <a href="single.html">
-                                                                        <img src="assets/imgs/news-8.jpg" alt="">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="post-content media-body">
-                                                                    <h6 class="post-title mb-10 text-limit-2-row">My entrance exam was on a book of matches </h6>
-                                                                    <div class="entry-meta meta-1 font-x-small color-grey mt-10">
-                                                                        <span class="post-on">25 April</span>
-                                                                        <span class="hit-count has-dot">126k Views</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="tab-pane" id="news-1" role="tabpanel">
-                                                        <div class="row">
-                                                            <div class="col-3 post-module-1">
-                                                                <div class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
-                                                                    <a href="single.html">
-                                                                        <img src="assets/imgs/news-5.jpg" alt="">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="post-content media-body">
-                                                                    <h6 class="post-title mb-10 text-limit-2-row">The litigants on the screen are not actors </h6>
-                                                                    <div class="entry-meta meta-1 font-x-small color-grey">
-                                                                        <span class="post-on">25 April</span>
-                                                                        <span class="hit-count has-dot">126k Views</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-3 post-module-1">
-                                                                <div class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
-                                                                    <a href="single.html">
-                                                                        <img src="assets/imgs/news-6.jpg" alt="">
-                                                                    </a>
-                                                                    <span class="top-right-icon background3">
-                                                                        <i class="mdi mdi-videocam"></i>
-                                                                    </span>
-                                                                </div>
-                                                                <div class="post-content media-body">
-                                                                    <h6 class="post-title mb-10 text-limit-2-row">Not a bit of hesitation, you better think twice</h6>
-                                                                    <div class="entry-meta meta-1 font-x-small color-grey mt-10">
-                                                                        <span class="post-on">25 April</span>
-                                                                        <span class="hit-count has-dot">126k Views</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-3 post-module-1">
-                                                                <div class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
-                                                                    <a href="single.html">
-                                                                        <img src="assets/imgs/news-7.jpg" alt="">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="post-content media-body">
-                                                                    <h6 class="post-title mb-10 text-limit-2-row">We got a right to pick a little fight, Bonanza </h6>
-                                                                    <div class="entry-meta meta-1 font-x-small color-grey mt-10">
-                                                                        <span class="post-on">25 April</span>
-                                                                        <span class="hit-count has-dot">126k Views</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-3 post-module-1">
-                                                                <div class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
-                                                                    <a href="single.html">
-                                                                        <img src="assets/imgs/news-8.jpg" alt="">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="post-content media-body">
-                                                                    <h6 class="post-title mb-10 text-limit-2-row">My entrance exam was on a book of matches </h6>
-                                                                    <div class="entry-meta meta-1 font-x-small color-grey mt-10">
-                                                                        <span class="post-on">25 April</span>
-                                                                        <span class="hit-count has-dot">126k Views</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="tab-pane" id="news-2" role="tabpanel">
-                                                        <div class="row">
-                                                            <div class="col-3 post-module-1">
-                                                                <div class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
-                                                                    <a href="single.html">
-                                                                        <img src="assets/imgs/news-9.jpg" alt="">
-                                                                    </a>
-                                                                    <span class="top-right-icon background2">
-                                                                        <i class="mdi mdi-audiotrack"></i>
-                                                                    </span>
-                                                                </div>
-                                                                <div class="post-content media-body">
-                                                                    <h6 class="post-title mb-10 text-limit-2-row">The litigants on the screen are not actors </h6>
-                                                                    <div class="entry-meta meta-1 font-x-small color-grey">
-                                                                        <span class="post-on">25 April</span>
-                                                                        <span class="hit-count has-dot">126k Views</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-3 post-module-1">
-                                                                <div class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
-                                                                    <a href="single.html">
-                                                                        <img src="assets/imgs/news-10.jpg" alt="">
-                                                                    </a>
-                                                                    <span class="top-right-icon background8">
-                                                                        <i class="mdi mdi-favorite"></i>
-                                                                    </span>
-                                                                </div>
-                                                                <div class="post-content media-body">
-                                                                    <h6 class="post-title mb-10 text-limit-2-row">Not a bit of hesitation, you better think twice</h6>
-                                                                    <div class="entry-meta meta-1 font-x-small color-grey mt-10">
-                                                                        <span class="post-on">25 April</span>
-                                                                        <span class="hit-count has-dot">126k Views</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-3 post-module-1">
-                                                                <div class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
-                                                                    <a href="single.html">
-                                                                        <img src="assets/imgs/news-11.jpg" alt="">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="post-content media-body">
-                                                                    <h6 class="post-title mb-10 text-limit-2-row">We got a right to pick a little fight, Bonanza </h6>
-                                                                    <div class="entry-meta meta-1 font-x-small color-grey mt-10">
-                                                                        <span class="post-on">25 April</span>
-                                                                        <span class="hit-count has-dot">126k Views</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-3 post-module-1">
-                                                                <div class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
-                                                                    <a href="single.html">
-                                                                        <img src="assets/imgs/news-12.jpg" alt="">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="post-content media-body">
-                                                                    <h6 class="post-title mb-10 text-limit-2-row">My entrance exam was on a book of matches </h6>
-                                                                    <div class="entry-meta meta-1 font-x-small color-grey mt-10">
-                                                                        <span class="post-on">25 April</span>
-                                                                        <span class="hit-count has-dot">126k Views</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="tab-pane" id="news-3" role="tabpanel">
-                                                        <div class="row">
-                                                            <div class="col-3 post-module-1">
-                                                                <div class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
-                                                                    <a href="single.html">
-                                                                        <img src="assets/imgs/news-13.jpg" alt="">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="post-content media-body">
-                                                                    <h6 class="post-title mb-10 text-limit-2-row">The litigants on the screen are not actors </h6>
-                                                                    <div class="entry-meta meta-1 font-x-small color-grey">
-                                                                        <span class="post-on">25 April</span>
-                                                                        <span class="hit-count has-dot">126k Views</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-3 post-module-1">
-                                                                <div class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
-                                                                    <a href="single.html">
-                                                                        <img src="assets/imgs/news-14.jpg" alt="">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="post-content media-body">
-                                                                    <h6 class="post-title mb-10 text-limit-2-row">Not a bit of hesitation, you better think twice</h6>
-                                                                    <div class="entry-meta meta-1 font-x-small color-grey mt-10">
-                                                                        <span class="post-on">25 April</span>
-                                                                        <span class="hit-count has-dot">126k Views</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-3 post-module-1">
-                                                                <div class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
-                                                                    <a href="single.html">
-                                                                        <img src="assets/imgs/news-15.jpg" alt="">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="post-content media-body">
-                                                                    <h6 class="post-title mb-10 text-limit-2-row">We got a right to pick a little fight, Bonanza </h6>
-                                                                    <div class="entry-meta meta-1 font-x-small color-grey mt-10">
-                                                                        <span class="post-on">25 April</span>
-                                                                        <span class="hit-count has-dot">126k Views</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-3 post-module-1">
-                                                                <div class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
-                                                                    <a href="single.html">
-                                                                        <img src="assets/imgs/news-16.jpg" alt="">
-                                                                    </a>
-                                                                    <span class="top-right-icon background2">
-                                                                        <i class="mdi mdi-audiotrack"></i>
-                                                                    </span>
-                                                                </div>
-                                                                <div class="post-content media-body">
-                                                                    <h6 class="post-title mb-10 text-limit-2-row">My entrance exam was on a book of matches </h6>
-                                                                    <div class="entry-meta meta-1 font-x-small color-grey mt-10">
-                                                                        <span class="post-on">25 April</span>
-                                                                        <span class="hit-count has-dot">126k Views</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li><a href="category-metro.html"><span class="mr-15">
-                                                    <ion-icon name="film-outline"></ion-icon>
-                                                </span>Video</a></li>
-                                        <li><a href="contact.html"><span class="mr-15">
-                                                    <ion-icon name="mail-unread-outline"></ion-icon>
-                                                </span>Contact</a></li>
-                                    </ul>
-                                    <div class="d-inline ml-50 tools-icon">
-                                        <a class="red-tooltip text-danger" href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Hot Topics">
-                                            <ion-icon name="flame-outline"></ion-icon>
-                                        </a>
-                                        <a class="red-tooltip text-primary" href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Trending">
-                                            <ion-icon name="flash-outline"></ion-icon>
-                                        </a>
-                                        <a class="red-tooltip text-success" href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Notifications">
-                                            <ion-icon name="notifications-outline"></ion-icon>
-                                            <span class="notification bg-success">5</span>
-                                        </a>
-                                    </div>
+                                            </li>
+                                        @endguest
+                                            <li class="mega-menu-item">
+                                                <a href="{{ route('change-languages', ['language' => 'en']) }}">{{ trans('message.en') }}</a>
+                                            </li>
+                                            <li class="mega-menu-item">
+                                                <a href="{{ route('change-languages', ['language' => 'vi']) }}">{{ trans('message.vi') }}</a>
+                                            </li>
+                                        </ul>
+
+                                    {{-- Notification --}}
                                 </nav>
                             </div>
-                            <!-- Search -->
-                            <form action="#" method="get" class="search-form d-lg-inline float-right position-relative mr-30 d-none">
-                                <input type="text" class="search_field" placeholder="Search" value="" name="s">
-                                <span class="search-icon"><i class="ti-search mr-5"></i></span>
-                            </form>
-                            <!-- Off canvas -->
-                            <div class="off-canvas-toggle-cover">
-                                <div class="off-canvas-toggle hidden d-inline-block ml-15" id="off-canvas-toggle">
-                                    <ion-icon name="grid-outline"></ion-icon>
-                                </div>
-                            </div>
+
+                           <!-- Search -->
+                           <form action="{{ route('search') }}" method="GET"
+                           class="search-form d-lg-inline float-right position-relative mr-30 d-none">
+                           <input type="text" class="search_field" placeholder="{{ trans('message.search') }}" value="" name="search">
+                           <button type="submit" class="search-icon"><i class="ti-search mr-5"></i></button>
+                       </form>
+                       <!-- Off canvas -->
+                       <div class="off-canvas-toggle-cover">
+                           <div class="off-canvas-toggle hidden d-inline-block ml-15" id="off-canvas-toggle">
+                               <ion-icon name="grid-outline"></ion-icon>
+                           </div>
+                       </div>
                         </div>
                     </div>
                 </div>
@@ -608,7 +327,7 @@
                                                 <button type="submit" class="btn btn-danger">{{ trans('message.delete') }}</button>
                                             </form>
                                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#post{{ $post->id }}">
-                                                Launch demo modal
+                                                Preview
                                               </button>
                                         </div>
                                     </div>
@@ -623,7 +342,7 @@
     </div> <!-- Main Wrap End-->
     @foreach ($users->posts as $post)
     <div class="modal fade" id="post{{ $post->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">{{ $post->title }}</h5>
