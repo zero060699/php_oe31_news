@@ -47,5 +47,11 @@ class AuthServiceProvider extends ServiceProvider
                 return true;
             }
         });
+        Gate::allows('can-action', function ($post) {
+            if ($post->status === config('number_status_post.status_request')) {
+
+                return true;
+            }
+        });
     }
 }

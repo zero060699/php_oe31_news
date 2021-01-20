@@ -4,7 +4,7 @@
     <div class="col-md-12 col-sm-12 alo-alo">
         <div class="x_panel create_post">
             <div class="x_title">
-                <h2>{{ trans('message.create_post') }}</h2>
+                <h2>{{ trans('message.edit_post') }}</h2>
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">

@@ -9,4 +9,5 @@ return [
     'user' => 3,
     'admin' => 1,
     'author' => 2,
+    'pending' => 1,
 ];
