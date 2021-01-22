@@ -61,6 +61,7 @@ return [
     'top' => 'Top',
     'trending' => 'Trending',
     'all' => 'All',
+    'my_post' => 'My Post',
     'en' => 'English',
     'vi' => 'Việt Nam',
     'popular' => 'Popular',
@@ -85,4 +86,6 @@ return [
     'save' => 'Save',
     'you_are_here' => 'You are here:',
     'latest_post' => 'Lastest Post',
+    'approved' => 'Approved',
+    'pending' => 'Pending',
 ];

@@ -11,6 +11,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/favicon.svg">
     <!-- UltraNews CSS  -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/widgets.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/color.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
@@ -282,64 +283,111 @@
             </div>
         </header>
         <!-- Main Wrap Start -->
-        <main class="position-relative">
-            <div class="container">
-                <div class="row mb-50">
-                    <div class="col-lg-2 d-none d-lg-block"></div>
-                    <!-- main content -->
-                    <div class="col-lg-8 col-md-12">
-                        <div class="author-bio border-radius-10 bg-white p-30 mb-50">
-                            <div class="author-image mb-30">
-                                <a href="author.html"><img src="{{ asset('images/' . $users->image) }}" alt="" class="avatar"></a></div>
-                            <div class="author-info">
-                                <h3><span class="vcard author"><span class="fn"><a title="Posts by Robert" rel="author">{{ $users->name }}</a></span></span></h3>
-                            </div>
-                        </div>
-                        <h2>{{trans('message.all_posts')}}</h2>
-                        <hr class="wp-block-separator is-style-wide">
-                        <div class="latest-post mb-50">
-                            <div class="loop-list-style-1">
-                                @foreach ($users->posts as $post)
-                                <article class="p-10 background-white border-radius-10 mb-30 wow fadeIn animated">
-                                    <div class="d-md-flex d-block">
-                                        <div class="post-thumb post-thumb-big d-flex mr-15 border-radius-15 img-hover-scale">
-                                            <a class="color-white" href="single.html">
-                                                <img class="border-radius-15" src="{{ asset('images/' . $post->image) }}" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="post-content media-body">
-                                            <div class="entry-meta mb-15 mt-10">
-                                                <a class="entry-meta meta-2" href="category.html"><span class="post-in text-danger font-x-small">{{ $post->category->name }}</span></a>
-                                            </div>
-                                            <h5 class="post-title mb-15 text-limit-2-row">
-                                                <span class="post-format-icon">
-                                                    <ion-icon name="videocam-outline"></ion-icon>
-                                                </span>
-                                                <a href="{{ route('posts.show', [$post->id]) }}">{{ $post->title }}</a></h5>
-                                            <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                <span class="post-by">{{ trans('message.by') }} <a>{{ $post->author->name }}</a></span>
-                                                <span class="post-on">{{  date('M d ,Y', strtotime($post->created_at)) }} {{ trans('message.at') }} {{  date('g:ia', strtotime($post->created_at)) }}</span>
-                                            </div>
-                                            <form action="{{ route('authors.destroy', $post->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <a href="{{ route('authors.edit', $post->id) }}" class="btn btn-warning">{{ trans('message.edit') }}</a>
-                                                <button type="submit" class="btn btn-danger">{{ trans('message.delete') }}</button>
-                                            </form>
-                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#post{{ $post->id }}">
-                                                Preview
-                                              </button>
+        <div class="col-md-12 col-sm-12 ">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>{{ trans('message.my_post') }}</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card-box table-responsive">
+                                <div id="datatable-responsive_wrapper"
+                                    class="dataTables_wrapper container-fluid dt-bootstrap no-footer">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <table id="datatable-responsive"
+                                                class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline"
+                                                cellspacing="0" width="100%" role="grid"
+                                                aria-describedby="datatable-responsive_info">
+                                                <thead>
+                                                    <tr role="row">
+                                                        <th class="sorting_asc" tabindex="0"
+                                                            aria-controls="datatable-responsive" rowspan="1" colspan="1"
+                                                            aria-sort="ascending"
+                                                            aria-label="First name: activate to sort column descending">
+                                                            {{ trans('message.stt') }}
+                                                        </th>
+                                                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Last name: activate to sort column ascending">
+                                                            {{ trans('message.title') }}
+                                                        </th>
+                                                        <th class="sorting_asc" tabindex="0"
+                                                            aria-controls="datatable-responsive" rowspan="1" colspan="1"
+                                                            aria-sort="ascending"
+                                                            aria-label="First name: activate to sort column descending">
+                                                            {{ trans('message.image') }}
+                                                        </th>
+                                                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Last name: activate to sort column ascending">
+                                                            {{ trans('message.status') }}
+                                                        </th>
+                                                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Last name: activate to sort column ascending">
+                                                            {{ trans('message.created_at') }}
+                                                        </th>
+                                                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Last name: activate to sort column ascending">
+                                                            {{ trans('message.updated_at') }}
+                                                        </th>
+                                                        <th class="sorting" tabindex="0" aria-controls="datatable-responsive"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Last name: activate to sort column ascending">
+                                                            {{ trans('message.action') }}
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @php
+                                                        $index = 1;
+                                                    @endphp
+                                                    @foreach ($users->posts as $post)
+                                                        <tr role="row" class="odd">
+                                                            <td>{{ $index++ }}</td>
+                                                            <td>{{ $post->title }}</td>
+                                                            <td><img class="img-post-author" src = "{{ asset('images/' . $post->image) }}" height="73px" width="73px"></td>
+                                                            <td>
+                                                                @if ($post->status === config('number_status_post.status'))
+                                                                    {{ trans('message.approved') }}
+                                                                    @else
+
+                                                                    {{ trans('message.pendding') }}
+                                                                    @endif
+                                                            </td>
+                                                            <td>{{ $post->created_at }}</td>
+                                                            <td>{{ $post->updated_at }}</td>
+                                                            <td class="d-flex">
+                                                                @if ($post->status === config('number_status_post.pending'))
+                                                                <form action="{{ route('authors.destroy', $post->id) }}" method="POST" class="form-btn">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <a href="{{ route('authors.edit', $post->id) }}" >{{ trans('message.edit') }}</a>
+                                                                    <button type="submit" class="delete-btn">{{ trans('message.delete') }}</button>
+                                                                </form>
+                                                                <button type="button" class="preview-btn" data-toggle="modal" data-target="#post{{ $post->id }}">
+                                                                    Preview
+                                                                </button>
+                                                                @endif
+
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
-                                </article>
-                                @endforeach
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </main>
-    </div> <!-- Main Wrap End-->
+        </div>
     @foreach ($users->posts as $post)
     <div class="modal fade" id="post{{ $post->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">

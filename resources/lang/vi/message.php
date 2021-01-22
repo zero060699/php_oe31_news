@@ -60,6 +60,7 @@ return [
     'news' => 'nóng hổi',
     'top' => 'Xu hướng',
     'trending' => 'Hàng đầu',
+    'my_post' => 'Bài viết của tôi',
     'all' => 'Tất cả',
     'en' => 'English',
     'vi' => 'Việt Nam',
@@ -84,4 +85,6 @@ return [
     'recent' => 'Vừa qua',
     'save' => 'Gửi',
     'latest_post' => 'Bài viết mới nhất',
+    'approved' => 'Chấp nhận',
+    'pending' => 'Chờ',
 ];
