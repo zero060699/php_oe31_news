@@ -46,7 +46,7 @@ class User extends Authenticatable
 
     public function requestwriter()
     {
-        return $this->belongsTo(RequestWriter::class);
+        return $this->hasOne(RequestWriter::class);
     }
 
     public function role()
