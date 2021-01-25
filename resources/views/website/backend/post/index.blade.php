@@ -74,6 +74,7 @@
                                                         <td>{{ $index++ }}</td>
                                                         <td>{{ $post->title }}</td>
                                                         <td>{{ $post->author->name }}</td>
+                                                        <td>{{ $post->category->name }}</td>
                                                         <td>{{ $post->view }}</td>
                                                         <td>{{ $post->created_at }}</td>
                                                         <td>{{ $post->updated_at }}</td>

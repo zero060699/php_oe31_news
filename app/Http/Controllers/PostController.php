@@ -10,13 +10,22 @@ use App\Models\User;
 use App\Models\Like;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Repositories\Post\PostRepository;
+use App\Repositories\Post\PostRepositoryInterface;
+use App\Repositories\Category\CategoryRepositoryInterface;
+use App\Repositories\Category\CategoryRepository;
 
 class PostController extends Controller
 {
-    public function __construct()
+    protected $postRepo;
+    protected $categoryRepo;
+
+    public function __construct(PostRepositoryInterface $postRepo, CategoryRepositoryInterface $categoryRepo)
     {
         $this->middleware('admin')->except(['show', 'search']);
         $this->middleware('auth')->except('show');
+        $this->postRepo = $postRepo;
+        $this->categoryRepo = $categoryRepo;
     }
     /**
      * Display a listing of the resource.
@@ -25,7 +34,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('author')->where('status', config('number_status_post.status'))->latest()->paginate(config('number_status_post.paginate_home'));
+        $posts = $this->postRepo->getPendingPost();
 
         return view('website.backend.post.index', compact('posts'));
     }
@@ -59,13 +68,13 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = Post::findOrFail($id);
+        $post = $this->postRepo->find($id);
 
         if ($post->status == config('number_status_post.status_request')) {
             abort(Response::HTTP_NOT_FOUND);
         }
         $post->load('comments.user');
-        $category = Category::where('parent_id', config('number_format.parent_id'))->with('children')->get();
+        $category = $this->categoryRepo->loadParent();
         $post->update([
             'view' => $post->view + config('number_format.view'),
         ]);
@@ -77,7 +86,7 @@ class PostController extends Controller
     public function search(Request $request)
     {
         $search = $request->search;
-        $category = Category::where('parent_id', config('number_format.parent_id'))->get();
+        $category = $this->categoryRepo->loadParent();
         $category->load('children');
         $posts = Post::where('title', 'LIKE', '%' .$search. '%')->with('category')->paginate(config('number_status_post.paginate_home'));
 
@@ -103,7 +112,7 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $post = Post::findOrFail($id);
+        $post = $this->postRepo->find($id);
         $post->update($request->only('status'));
         Alert::success(trans('message.success'), trans('message.successfully'));
 
