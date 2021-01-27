@@ -12,6 +12,7 @@
 /tests/coverage
 /config/sweetalert.php
 /resources/views/vendor
+/tests/Unit/coverage
 /public/frontend
 /public/images/
 /vendor

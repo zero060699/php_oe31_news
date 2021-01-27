@@ -170,7 +170,7 @@
                                                     <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                                         @csrf
                                                         <button class="btn btn-light"
-                                                            type="submit">{{ trans('message.logout') }}</button>
+                                                            type="submit" dusk="logout">{{ trans('message.logout') }}</button>
                                                     </form>
                                                     @can('my_post')
                                                         <a href="{{ route('postAuthor', [Auth::user()->id]) }}" class="btn btn-primary">{{ trans('message.my_post') }}</a>
@@ -185,12 +185,12 @@
                                         @endguest
                                         <li class="nav-item dropdown">
                                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                                data-toggle="dropdown" aria-haspopup="true" dusk="language" aria-expanded="false" v-pre>
                                                 {{ trans('message.language') }}
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                                <a href="{{ route('change-languages', ['language' => 'en']) }}">{{ trans('message.en') }}</a>
-                                                <a href="{{ route('change-languages', ['language' => 'vi']) }}">{{ trans('message.vi') }}</a>
+                                                <a href="{{ route('change-languages', ['language' => 'en']) }}" dusk="english">{{ trans('message.en') }}</a>
+                                                <a href="{{ route('change-languages', ['language' => 'vi']) }}" dusk="vietnam">{{ trans('message.vi') }}</a>
                                             </div>
                                         </li>
                                     {{-- Notification --}}
@@ -242,7 +242,7 @@
                             @foreach ($category as $item)
                                 <ul class="font-small text-muted">
                                     @foreach ($item->children as $child)
-                                        <li class="cat-item cat-item-2"><a href="{{ route('filterCategory', [$child->id]) }}">{{ $child->name }}</a></li>
+                                        <li class="cat-item cat-item-2"><a href="{{ route('filterCategory', [$child->id]) }}" dusk="category">{{ $child->name }}</a></li>
                                     @endforeach
                                 </ul>
                             @endforeach
