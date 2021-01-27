@@ -3,6 +3,7 @@
 namespace Tests;
 
 use Illuminate\Contracts\Console\Kernel;
+use Tests\TestCase;
 
 trait CreatesApplication
 {

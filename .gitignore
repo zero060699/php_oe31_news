@@ -7,7 +7,9 @@
 /storage/*.key
 /public/adminbackend
 /public/assets
+/public/coverage
 /public/vendor
+/tests/coverage
 /config/sweetalert.php
 /resources/views/vendor
 /public/frontend
