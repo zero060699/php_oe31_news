@@ -28,7 +28,7 @@
                 </a>
                 <ul class="nav child_menu">
                     <li><a href="{{ route('users.index') }}">{{ trans('message.user') }}</a></li>
-                    <li><a href="{{ route('authors.index') }}">{{ trans('message.author') }}</a></li>
+                    <li><a href="{{ route('manageAuthor') }}">{{ trans('message.author') }}</a></li>
                 </ul>
             </li>
             <li>
