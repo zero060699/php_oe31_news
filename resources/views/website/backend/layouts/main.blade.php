@@ -10,7 +10,7 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title">
-                        <a href="index.html" class="site_title"><i class="fa fa-paw"></i>
+                        <a href="index.html" dusk="text" class="site_title"><i class="fa fa-paw"></i>
                             <span>{{ trans('message.admin') }}</span></a>
                     </div>
                     <div class="clearfix"></div>
@@ -57,31 +57,31 @@
                                 @endif
                             @else
                                 <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle logouttt" href="#" role="button"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         <img src="{{ asset(config('image_user.image') . '/' . Auth::user()->image) }}" alt=""
                                             class="avatar_user">
                                         {{ Auth::user()->name }}
                                     </a>
 
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <div class="dropdown-menu dropdown-menu-right " aria-labelledby="navbarDropdown">
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                             @csrf
-                                            <button type="submit" class="logout_btn">{{ trans('message.logout') }}</button>
+                                            <button type="submit" dusk="logoutt" class="logout_btn">{{ trans('message.logout') }}</button>
                                         </form>
                                     </div>
                                 </li>
                             @endguest
                             </li>
                             <li class="nav-item dropdown language-menu">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle languagess" href="#" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" dusk="languagess" aria-expanded="false" v-pre>
                                     {{ trans('message.language') }}
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right language-li" aria-labelledby="navbarDropdown">
-                                    <a href="{{ route('change-languages', ['language' => 'en']) }}" class="btn btn-primary">{{ trans('message.en') }}</a>
+                                    <a href="{{ route('change-languages', ['language' => 'en']) }}" dusk="english" class="btn btn-primary">{{ trans('message.en') }}</a>
                                     <br>
-                                    <a href="{{ route('change-languages', ['language' => 'vi']) }}" class="btn btn-primary">{{ trans('message.vi') }}</a>
+                                    <a href="{{ route('change-languages', ['language' => 'vi']) }}" dusk="vietnam" class="btn btn-primary">{{ trans('message.vi') }}</a>
                                 </div>
                             </li>
                         </ul>

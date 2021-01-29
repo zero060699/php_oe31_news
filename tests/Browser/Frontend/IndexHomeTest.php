@@ -55,18 +55,17 @@ class IndexHomeTest extends DuskTestCase
                 ->visit('/home')
                 ->click('.dropdown-toggle')
                 ->click('@logout')
-                ->assertPathIs('/home');
+                ->assertPathIs('/');
         });
     }
 
     public function test_category_view_home()
     {
         $this->browse(function (Browser $browser) {
-            $user = User::find(1);
-            $browser->loginAs($user)
-                ->visit('/home')
+            $browser->visit('/home')
+                ->assertPathIs('/home')
                 ->click('@category')
-                ->assertPathIs('/filter/26');
+                ->assertPathIs('/filter/2');
         });
     }
 
