@@ -23,13 +23,15 @@ class AuthorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    public function manageAuthor()
     {
-        $authors= Post::all();
+        $category = Category::where('parent_id', config('number_format.parent_id'))->get();
+        $category->load('children');
+        $requestWriter = User::where('role_id', config('number_status_post.author'))->get();
 
-        return view('website.frontend.authors')->with('authors', $authors);
+        return view('website.backend.author_request.index', compact('category', 'requestWriter'));
     }
-
     /**
      * Show the form for creating a new resource.
      *

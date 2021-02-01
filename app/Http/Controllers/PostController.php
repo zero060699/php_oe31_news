@@ -40,27 +40,6 @@ class PostController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -68,17 +47,15 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = $this->postRepo->find($id);
+        $post = $this->postRepo->find($id, ['comments.user']);
 
         if ($post->status == config('number_status_post.status_request')) {
             abort(Response::HTTP_NOT_FOUND);
         }
-        $post->load('comments.user');
         $category = $this->categoryRepo->loadParent();
-        $post->update([
+        $this->postRepo->update($id, [
             'view' => $post->view + config('number_format.view'),
         ]);
-        $like = $post->likes->where('like', config('number_format.view'))->count();
 
         return view('website.frontend.detail', compact('post', 'category'));
     }
@@ -87,20 +64,9 @@ class PostController extends Controller
     {
         $search = $request->search;
         $category = $this->categoryRepo->loadParent();
-        $category->load('children');
-        $posts = Post::where('title', 'LIKE', '%' .$search. '%')->with('category')->paginate(config('number_status_post.paginate_home'));
+        $posts = $this->postRepo->search($search);
 
         return view('website.frontend.search', compact('posts', 'category', 'search'));
-    }
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -113,20 +79,11 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $post = $this->postRepo->find($id);
-        $post->update($request->only('status'));
+        $this->postRepo->update($id, [
+            'status' => $request->status,
+        ]);
         Alert::success(trans('message.success'), trans('message.successfully'));
 
         return redirect()->back();
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

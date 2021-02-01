@@ -2,6 +2,7 @@
 namespace App\Repositories\Post;
 
 use App\Repositories\BaseRepository;
+use App\Models\Post;
 
 class PostRepository extends BaseRepository implements PostRepositoryInterface
 {
@@ -20,8 +21,11 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
             ->paginate(config('number_status_post.paginate_home'));
     }
 
-    public function find($id)
+    public function search($search)
     {
-        return $this->model->findOrFail($id);
+        return $this->model
+            ->where('title', 'LIKE', '%' .$search. '%')
+            ->with('category')
+            ->paginate(config('number_status_post.paginate_home'));
     }
 }

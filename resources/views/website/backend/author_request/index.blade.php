@@ -73,7 +73,7 @@
                                                 @foreach ($requestWriter as $item)
                                                     <tr role="row" class="odd">
                                                         <td>{{ $index++ }}</td>
-                                                        <td>{{ $item->author->name }}</td>
+                                                        <td>{{ $item->name }}</td>
                                                         <td>{{ $item->role->name }}</td>
                                                         <td>{{ $item->status }}</td>
                                                         <td>{{  date('M d ,Y', strtotime($item->created_at))}} {{ trans('message.at')}} {{ date('g:ia', strtotime($item->created_at)) }}</td>

@@ -20,6 +20,7 @@ Route::group(['middleware' => ['localization']], function () {
         Route::get('/postRequest', 'AdminController@showRequestPost')->name('postRequest');
         Route::resource('users', 'UserController');
         Route::resource('comments', 'CommentController');
+        Route::get('manageAuthor', 'AuthorController@manageAuthor')->name('manageAuthor');
     });
     Route::resource('home', 'ClientController');
     Route::resource('posts', 'PostController');
